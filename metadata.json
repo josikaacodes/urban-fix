@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix UrbanFix AI Command",
+  "description": "Municipal Command Center \u0026 Civic Intelligence Desk for Ward triage, spatial telemetry, automated defect detection, and crew dispatch.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
