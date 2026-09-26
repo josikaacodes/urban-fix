@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Urban Fix — Citizen Civic Action & Community Redressal</title>
+  
+  <!-- Fonts: Space Grotesk (Display), DM Sans (Readable Body), JetBrains Mono (Technical Details) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen: {
+              50: '#FBF9F5',
+              100: '#F4EFE6',
+              200: '#E8E1D5',
+              300: '#D6CDC0',
+              400: '#C2B6A3',
+            },
+            ink: {
+              950: '#0F0E0D',
+              900: '#181716',
+              800: '#272523',
+              700: '#3D3A37',
+              600: '#524F4A',
+              500: '#69645E',
+              400: '#948E85',
+              300: '#BFB9AE',
+              200: '#DCD7CE',
+            },
+            terracotta: {
+              400: '#E26D40',
+              500: '#D95A2B',
+              600: '#C2471B',
+              700: '#A43711',
+              800: '#83280B',
+            },
+            borderwarm: '#DFD8CC',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px rgba(24, 23, 22, 0.05), 0 1px 2px rgba(24, 23, 22, 0.03)',
+            'elevated': '0 4px 16px -2px rgba(24, 23, 22, 0.08), 0 2px 6px -1px rgba(24, 23, 22, 0.04)',
+            'tactile': '2px 2px 0px #181716',
+            'tactile-sm': '1px 1px 0px #181716',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Architectural blueprint subtle civic grid */
+    .civic-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(24, 23, 22, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(24, 23, 22, 0.035) 1px, transparent 1px);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #181716 !important;
+      box-shadow: 0 0 0 1px #181716;
+    }
+
+    /* Soundwave frequency bar animation for voice notes */
+    @keyframes soundwave {
+      0%, 100% { height: 6px; }
+      50% { height: 26px; }
+    }
+    .wave-bar {
+      animation: soundwave 0.85s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.25s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(6) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(7) { animation-delay: 0.08s; }
+    .wave-bar:nth-child(8) { animation-delay: 0.35s; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4EFE6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #BFB9AE;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #948E85;
+    }
+  </style>
+</head>
+<body class="bg-[#FBF9F5] text-ink-900 font-sans antialiased selection:bg-terracotta-600 selection:text-white min-h-screen flex flex-col">
+
+  <!-- ========================================================================= -->
+  <!-- TOP DUAL-ROLE BAR: INSTANT SWITCH TO AUTHORITY DESK                       -->
+  <!-- ========================================================================= -->
+  <div class="bg-ink-950 text-linen-100 text-[11px] font-mono px-4 py-1.5 border-b border-ink-800 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span class="text-linen-300">RESIDENT VIEW:</span>
+      <span class="text-linen-50">Public Grievance & Community Portal (Ward 174)</span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="authority.html" class="text-terracotta-400 hover:text-terracotta-300 flex items-center gap-1.5 font-bold transition">
+        <span>Switch to Municipal Authority Desk →</span>
+      </a>
+      <span class="text-ink-700 hidden sm:inline">|</span>
+      <span class="text-ink-400 hidden sm:inline">Citizen: Akash Sharma</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION HEADER                                                     -->
+  <!-- ========================================================================= -->
+  <header class="border-b border-borderwarm bg-[#FBF9F5]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Neighborhood Ward Tag -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchNavTab('report')">
+        <div class="w-10 h-10 bg-ink-950 text-linen-50 flex items-center justify-center font-mono font-bold text-sm tracking-tighter border border-ink-800 shadow-tactile-sm">
+          UF
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-bold text-lg uppercase tracking-tight text-ink-950">The Urban Fix</span>
+            <span class="hidden sm:inline-block px-1.5 py-0.5 bg-linen-200 border border-borderwarm text-[9px] font-mono uppercase font-semibold text-ink-700">Citizen Desk</span>
+          </div>
+          <div class="flex items-center gap-1.5 font-mono text-[10px] text-ink-500 uppercase tracking-wider">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+            <span id="active-ward-label" class="font-semibold text-ink-700">Ward 174 • HSR Layout, Bengaluru</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Menu: Report | Community | My Reports -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <nav class="flex items-center bg-linen-100 p-1 border border-borderwarm rounded text-xs font-mono">
+          <button 
+            id="nav-tab-report" 
+            onclick="switchNavTab('report')" 
+            class="px-3 sm:px-4 py-1.5 rounded font-bold bg-ink-950 text-linen-50 transition flex items-center gap-1.5">
+            <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-terracotta-400"></i>
+            <span>Report</span>
+          </button>
+          
+          <button 
+            id="nav-tab-community" 
+            onclick="switchNavTab('community')" 
+            class="px-3 sm:px-4 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5">
+            <i data-lucide="users" class="w-3.5 h-3.5"></i>
+            <span>Community Feed</span>
+            <span id="community-badge-count" class="ml-1 px-1.5 py-0.2 bg-terracotta-600 text-white rounded-full text-[9px] font-bold">4</span>
+          </button>
+
+          <button 
+            id="nav-tab-myreports" 
+            onclick="switchNavTab('myreports')" 
+            class="px-3 sm:px-4 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5">
+            <i data-lucide="clipboard-list" class="w-3.5 h-3.5"></i>
+            <span>My Reports</span>
+            <span id="myreports-count-pill" class="ml-1 px-1.5 py-0.2 bg-linen-200 text-ink-900 border border-borderwarm rounded-full text-[9px] font-bold">2</span>
+          </button>
+        </nav>
+
+        <!-- Citizen Profile Pill -->
+        <div class="hidden md:flex items-center gap-2 pl-3 border-l border-borderwarm">
+          <div class="w-8 h-8 rounded-full bg-linen-200 border border-borderwarm flex items-center justify-center font-mono text-xs font-bold text-ink-900 shadow-xs">
+            AS
+          </div>
+          <div class="text-left">
+            <span class="font-display text-xs font-bold block text-ink-950 leading-tight">Akash S.</span>
+            <span class="font-mono text-[9px] text-ink-500 block leading-tight">+91 98401 24789</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN USER PAGE CONTENT                                                    -->
+  <!-- ========================================================================= -->
+  <main class="flex-grow">
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!-- 1. REPORT AN ISSUE VIEW                                                 -->
+    <!-- ----------------------------------------------------------------------- -->
+    <section id="view-report" class="civic-grid py-8 sm:py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+        <!-- Citizen Header Banner -->
+        <div class="mb-6 space-y-1">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 bg-linen-100 border border-borderwarm text-[10px] font-mono uppercase tracking-wider text-ink-700">
+            <span class="w-1.5 h-1.5 rounded-full bg-terracotta-600"></span>
+            <span>Fast Citizen Redressal</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-display font-bold text-ink-950">Report an Infrastructure Defect</h1>
+          <p class="text-xs sm:text-sm text-ink-600 font-sans leading-relaxed">
+            Snap a photo, record a voice note, or describe the issue. Our system automatically directs it to the right municipal division and keeps you updated.
+          </p>
+        </div>
+
+        <!-- Main Submission Card -->
+        <div class="bg-white border border-borderwarm p-6 sm:p-8 shadow-subtle space-y-6">
+
+          <form id="report-form" onsubmit="handleCitizenSubmit(event)" class="space-y-6">
+            
+            <!-- Category Selection -->
+            <div>
+              <label class="block font-mono text-xs uppercase text-ink-800 font-bold mb-2">
+                1. What type of issue is this?
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
+                
+                <label class="category-choice cursor-pointer border border-ink-950 bg-linen-100 p-3 flex flex-col items-center text-center gap-1.5 transition font-bold shadow-tactile-sm">
+                  <input type="radio" name="report-category" value="Roads & Potholes" checked onchange="selectCategory(this)" class="sr-only">
+                  <i data-lucide="hammer" class="w-5 h-5 text-terracotta-600"></i>
+                  <span class="text-[11px]">Roads & Potholes</span>
+                </label>
+
+                <label class="category-choice cursor-pointer border border-borderwarm bg-linen-50 hover:bg-linen-100 p-3 flex flex-col items-center text-center gap-1.5 transition font-medium">
+                  <input type="radio" name="report-category" value="Electricity & Lights" onchange="selectCategory(this)" class="sr-only">
+                  <i data-lucide="zap" class="w-5 h-5 text-amber-600"></i>
+                  <span class="text-[11px]">Electricity & Lights</span>
+                </label>
+
+                <label class="category-choice cursor-pointer border border-borderwarm bg-linen-50 hover:bg-linen-100 p-3 flex flex-col items-center text-center gap-1.5 transition font-medium">
+                  <input type="radio" name="report-category" value="Water & Drainage" onchange="selectCategory(this)" class="sr-only">
+                  <i data-lucide="droplet" class="w-5 h-5 text-sky-600"></i>
+                  <span class="text-[11px]">Water & Drainage</span>
+                </label>
+
+                <label class="category-choice cursor-pointer border border-borderwarm bg-linen-50 hover:bg-linen-100 p-3 flex flex-col items-center text-center gap-1.5 transition font-medium">
+                  <input type="radio" name="report-category" value="Garbage & Waste" onchange="selectCategory(this)" class="sr-only">
+                  <i data-lucide="trash-2" class="w-5 h-5 text-emerald-700"></i>
+                  <span class="text-[11px]">Garbage & Waste</span>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Location with GPS Auto-Detect -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="font-mono text-xs uppercase text-ink-800 font-bold">
+                  2. Location / Street Address
+                </label>
+                <button 
+                  type="button" 
+                  onclick="detectCitizenLocation()" 
+                  class="font-mono text-[10px] text-terracotta-600 hover:text-terracotta-700 font-bold flex items-center gap-1 bg-linen-100 hover:bg-linen-200 px-2 py-0.5 border border-borderwarm transition">
+                  <i data-lucide="navigation" class="w-3 h-3"></i>
+                  <span>Detect My Location via GPS</span>
+                </button>
+              </div>
+
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="input-location" 
+                  required
+                  placeholder="e.g. 14th Main Rd, Near BDA Complex, Sector 2, HSR Layout" 
+                  value="4th Cross Road, Sector 2, HSR Layout, Bengaluru"
+                  oninput="updateRoutingBadge()"
+                  class="w-full px-3.5 py-2.5 bg-linen-50 border border-borderwarm font-sans text-xs text-ink-950 placeholder:text-ink-400"
+                />
+                <i data-lucide="map-pin" class="w-4 h-4 text-ink-400 absolute right-3 top-2.5"></i>
+              </div>
+
+              <div id="gps-status-indicator" class="mt-1.5 flex items-center gap-2 text-[10px] font-mono text-ink-500">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span>GPS Geotag: <code id="gps-coords-text" class="text-ink-800 font-semibold">12.9121° N, 77.6446° E</code> (HSR Layout Ward 174)</span>
+              </div>
+            </div>
+
+            <!-- Voice Grievance Recording Box -->
+            <div class="border border-borderwarm bg-linen-50 p-4 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="mic" class="w-4 h-4 text-terracotta-600"></i>
+                  <span class="font-mono text-xs uppercase text-ink-900 font-bold">Voice Note Dictation</span>
+                </div>
+                <span class="font-mono text-[10px] text-ink-500">Speak in English, Kannada, Hindi, or Tamil</span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-center gap-3">
+                <button 
+                  type="button" 
+                  id="btn-voice-record" 
+                  onclick="toggleVoiceRecording()"
+                  class="w-full sm:w-auto px-4 py-2 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold flex items-center justify-center gap-2 transition shadow-tactile-sm">
+                  <span id="voice-dot" class="w-2.5 h-2.5 rounded-full bg-terracotta-500"></span>
+                  <span id="voice-label">Record Voice Note</span>
+                </button>
+
+                <div class="flex-1 w-full bg-white border border-borderwarm px-3 py-2 flex items-center justify-between">
+                  <div class="flex items-center gap-1 h-6 overflow-hidden" id="wave-bars-wrapper">
+                    <div class="w-1 bg-ink-300 h-2"></div>
+                    <div class="w-1 bg-ink-400 h-3"></div>
+                    <div class="w-1 bg-ink-300 h-1.5"></div>
+                    <div class="w-1 bg-ink-300 h-2"></div>
+                    <div class="w-1 bg-ink-400 h-3.5"></div>
+                    <div class="w-1 bg-ink-300 h-1.5"></div>
+                    <div class="w-1 bg-ink-300 h-2"></div>
+                    <div class="w-1 bg-ink-400 h-3"></div>
+                  </div>
+                  <span id="voice-timer" class="font-mono text-xs font-bold text-ink-600">00:00</span>
+                </div>
+              </div>
+
+              <!-- Audio Preview Box -->
+              <div id="voice-preview-pill" class="hidden p-2.5 bg-white border border-borderwarm flex items-center justify-between text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="playVoiceSimulation()" class="p-1.5 bg-linen-200 hover:bg-linen-300 text-ink-900 rounded">
+                    <i data-lucide="play" class="w-3.5 h-3.5" id="voice-play-icon"></i>
+                  </button>
+                  <span class="text-ink-800 font-medium">Voice Memo Attached (0:14)</span>
+                  <span class="text-[10px] text-emerald-800 bg-emerald-50 px-1 border border-emerald-200">Transcribed</span>
+                </div>
+                <button type="button" onclick="appendVoiceTranscript()" class="text-terracotta-600 hover:underline font-bold text-[11px]">
+                  + Add to Description
+                </button>
+              </div>
+            </div>
+
+            <!-- Description Box -->
+            <div>
+              <label class="block font-mono text-xs uppercase text-ink-800 font-bold mb-1.5">
+                3. Describe the Problem
+              </label>
+              <textarea 
+                id="input-description" 
+                rows="3" 
+                required
+                placeholder="What seems to be broken? How severe is it for vehicles or pedestrians?" 
+                oninput="updateRoutingBadge()"
+                class="w-full px-3.5 py-2.5 bg-linen-50 border border-borderwarm font-sans text-xs text-ink-950 placeholder:text-ink-400 resize-none leading-relaxed"
+              >Deep 2-foot crater pothole formed near the main water connection. Two-wheelers are skidding frequently during dark hours.</textarea>
+            </div>
+
+            <!-- Photo Upload Box -->
+            <div>
+              <label class="block font-mono text-xs uppercase text-ink-800 font-bold mb-1.5">
+                4. Add On-Site Photo (Optional)
+              </label>
+              
+              <div class="flex items-center gap-3">
+                <label class="cursor-pointer px-4 py-2 bg-linen-100 hover:bg-linen-200 border border-borderwarm font-mono text-xs text-ink-900 font-medium flex items-center gap-2 transition">
+                  <i data-lucide="camera" class="w-4 h-4 text-terracotta-600"></i>
+                  <span>Upload / Take Photo</span>
+                  <input type="file" id="input-photo" accept="image/*" onchange="handleImageSelection(event)" class="sr-only">
+                </label>
+                <span id="photo-filename-label" class="font-mono text-[11px] text-ink-500 truncate max-w-xs">
+                  pothole_inspection_site.jpg
+                </span>
+              </div>
+
+              <!-- Photo Preview Container -->
+              <div id="photo-preview-box" class="mt-2.5 flex items-center gap-3 p-2 bg-linen-50 border border-borderwarm">
+                <div class="w-16 h-12 bg-linen-200 border border-borderwarm overflow-hidden flex items-center justify-center">
+                  <img id="photo-preview-image" src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=300&q=80" alt="Defect Photo" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <span class="font-mono text-xs font-bold text-ink-900 block" id="photo-display-title">Site Photo Ready</span>
+                  <span class="font-mono text-[10px] text-ink-500">Geotagged with your current location</span>
+                </div>
+                <button type="button" onclick="removePhoto()" class="text-ink-400 hover:text-terracotta-600 p-1">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Helpful Automated Dispatch Preview (Friendly, NOT Complicated) -->
+            <div class="p-3.5 bg-linen-100 border border-borderwarm flex items-start sm:items-center justify-between gap-3 text-xs font-mono">
+              <div class="flex items-center gap-2.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-600 flex-shrink-0"></div>
+                <div>
+                  <span class="text-ink-500 text-[10px] uppercase font-bold block">Assigned Division:</span>
+                  <span id="auto-routed-dept" class="font-bold text-ink-950">BBMP Road Infrastructure & Civil Works</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-ink-500 text-[10px] uppercase font-bold block">Expected Turnaround:</span>
+                <span id="auto-sla-time" class="font-bold text-terracotta-600">Within 24 Hours</span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+              <button 
+                type="submit" 
+                class="w-full py-3.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase tracking-wider font-bold shadow-tactile transition flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4 text-terracotta-400"></i>
+                <span>Submit Grievance to Municipal Desk →</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!-- 2. COMMUNITY WARD FEED VIEW (DUPLICATE DETECTION & UPVOTES)            -->
+    <!-- ----------------------------------------------------------------------- -->
+    <section id="view-community" class="hidden civic-grid py-8 sm:py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+
+        <!-- Community Header Banner -->
+        <div class="border border-borderwarm bg-white p-6 sm:p-7 shadow-subtle">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 font-mono text-xs text-terracotta-600 font-bold uppercase mb-1">
+                <i data-lucide="map" class="w-4 h-4"></i>
+                <span>Ward 174 Neighborhood Activity</span>
+              </div>
+              <h2 class="text-2xl font-display font-bold text-ink-950">Community Issues & Shared Reports</h2>
+              <p class="text-xs text-ink-600 font-sans mt-1 max-w-xl">
+                See what issues your neighbors have reported. If a problem already affects your street, click <strong>"I'm Affected Too (+1)"</strong> to boost its priority instead of filing duplicate complaints!
+              </p>
+            </div>
+            
+            <button 
+              onclick="switchNavTab('report')" 
+              class="px-4 py-2.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold shadow-tactile-sm transition flex items-center justify-center gap-1.5 flex-shrink-0">
+              <i data-lucide="plus" class="w-4 h-4 text-terracotta-400"></i>
+              <span>Report New Defect</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 bg-white border border-borderwarm p-3 sm:p-4 text-xs font-mono">
+          <div class="flex flex-wrap gap-1.5" id="community-filter-group">
+            <button onclick="filterCommunity('all')" class="comm-filter-btn px-3 py-1 bg-ink-950 text-linen-50 font-bold rounded">
+              All Ward Issues
+            </button>
+            <button onclick="filterCommunity('Roads')" class="comm-filter-btn px-3 py-1 bg-linen-100 hover:bg-linen-200 text-ink-800 rounded">
+              Roads
+            </button>
+            <button onclick="filterCommunity('Electricity')" class="comm-filter-btn px-3 py-1 bg-linen-100 hover:bg-linen-200 text-ink-800 rounded">
+              Electricity
+            </button>
+            <button onclick="filterCommunity('Water')" class="comm-filter-btn px-3 py-1 bg-linen-100 hover:bg-linen-200 text-ink-800 rounded">
+              Water & Drainage
+            </button>
+            <button onclick="filterCommunity('Garbage')" class="comm-filter-btn px-3 py-1 bg-linen-100 hover:bg-linen-200 text-ink-800 rounded">
+              Sanitation
+            </button>
+          </div>
+
+          <div class="text-[11px] text-ink-500">
+            Showing <strong id="comm-visible-count" class="text-ink-900">4</strong> neighborhood reports
+          </div>
+        </div>
+
+        <!-- Community Feed Cards List -->
+        <div id="community-feed-list" class="space-y-4">
+          <!-- Populated dynamically via renderCommunityFeed() -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------------------- -->
+    <!-- 3. MY REPORTS & TRACKING VIEW (PROGRESS & CITIZEN AUDIT)                -->
+    <!-- ----------------------------------------------------------------------- -->
+    <section id="view-myreports" class="hidden civic-grid py-8 sm:py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+
+        <!-- Header -->
+        <div class="border border-borderwarm bg-white p-6 shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="font-mono text-xs text-terracotta-600 font-bold uppercase tracking-wider block">Resident Tracker</span>
+            <h2 class="text-2xl font-display font-bold text-ink-950 mt-0.5">My Submitted Grievances</h2>
+            <p class="text-xs text-ink-600 font-sans mt-1">
+              Track the step-by-step progress of your tickets. When work is finished by field engineers, you audit and verify it here.
+            </p>
+          </div>
+
+          <button 
+            onclick="switchNavTab('report')" 
+            class="px-4 py-2.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold shadow-tactile-sm transition flex items-center justify-center gap-1.5 flex-shrink-0">
+            <i data-lucide="plus" class="w-4 h-4 text-terracotta-400"></i>
+            <span>File Another Issue</span>
+          </button>
+        </div>
+
+        <!-- Filter Chips for My Reports -->
+        <div class="flex gap-2 text-xs font-mono">
+          <button onclick="filterMyReports('all')" class="my-filter-btn px-3.5 py-1.5 bg-ink-950 text-linen-50 font-bold shadow-tactile-sm">
+            All My Tickets (<span id="my-count-all">3</span>)
+          </button>
+          <button onclick="filterMyReports('active')" class="my-filter-btn px-3.5 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800">
+            In Progress
+          </button>
+          <button onclick="filterMyReports('ready_audit')" class="my-filter-btn px-3.5 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800">
+            Needs Your Audit
+          </button>
+          <button onclick="filterMyReports('completed')" class="my-filter-btn px-3.5 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800">
+            Completed & Verified
+          </button>
+        </div>
+
+        <!-- My Reports Cards Container -->
+        <div id="my-reports-list" class="space-y-5">
+          <!-- Dynamically populated via renderMyReports() -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODALS                                                                    -->
+  <!-- ========================================================================= -->
+
+  <!-- Modal 1: Submission Success Dialog -->
+  <div id="modal-report-success" class="fixed inset-0 z-50 bg-ink-950/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white border border-ink-900 max-w-md w-full p-6 sm:p-7 shadow-2xl relative">
+      <div class="w-12 h-12 bg-linen-200 border border-borderwarm text-emerald-700 flex items-center justify-center mb-4 shadow-tactile-sm">
+        <i data-lucide="check" class="w-6 h-6"></i>
+      </div>
+      
+      <span class="font-mono text-xs uppercase text-emerald-700 tracking-wider font-bold">Successfully Dispatched</span>
+      <h3 class="text-2xl font-display font-bold text-ink-950 mt-1">Grievance Registered</h3>
+      
+      <p class="text-xs text-ink-700 mt-2 font-sans leading-relaxed">
+        Your issue has been logged, geotagged, and assigned to the local field unit. You will receive SMS alerts as crews make progress.
+      </p>
+
+      <div class="my-4 p-4 bg-linen-50 border border-borderwarm font-mono text-xs space-y-2">
+        <div class="flex justify-between">
+          <span class="text-ink-500">TICKET TOKEN:</span>
+          <span id="succ-modal-token" class="font-bold text-ink-950">#UF-2026-00492</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink-500">CATEGORY:</span>
+          <span id="succ-modal-cat" class="font-medium text-ink-900">Roads & Potholes</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink-500">DIVISION:</span>
+          <span id="succ-modal-dept" class="font-bold text-terracotta-600">BBMP Road Infrastructure</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink-500">COMMUNITY STATUS:</span>
+          <span class="font-bold text-emerald-800">Shared to Ward 174 Feed</span>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button 
+          onclick="closeSuccessModalTo('community')" 
+          class="flex-1 py-2.5 border border-borderwarm hover:bg-linen-100 text-ink-900 font-mono text-xs font-semibold">
+          View in Community Feed
+        </button>
+        <button 
+          onclick="closeSuccessModalTo('myreports')" 
+          class="flex-1 py-2.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold tracking-wider shadow-tactile-sm">
+          Track My Ticket →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Citizen Feedback & Audit Verification Modal -->
+  <div id="modal-feedback" class="fixed inset-0 z-50 bg-ink-950/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white border border-ink-900 max-w-lg w-full p-6 shadow-2xl relative">
+      
+      <div class="flex justify-between items-start pb-3 border-b border-borderwarm">
+        <div>
+          <span class="font-mono text-[10px] text-terracotta-600 font-bold uppercase tracking-wider">Citizen Verification</span>
+          <h3 class="text-xl font-display font-bold text-ink-950" id="feedback-title">
+            Verify Resolution for #UF-2026-00141
+          </h3>
+        </div>
+        <button onclick="closeFeedbackModal()" class="text-ink-400 hover:text-ink-900">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="py-4 space-y-4 font-mono text-xs">
+        
+        <div class="p-3 bg-linen-100 border border-borderwarm text-[11px] text-ink-700">
+          <strong class="text-ink-950 block mb-0.5">Your Feedback Closes the Ticket:</strong>
+          Field workers have marked this issue as resolved. Please certify the quality on the ground so we can close the docket.
+        </div>
+
+        <!-- 1-5 Star Rating -->
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-2">How satisfied are you with the repair?</label>
+          <div class="flex gap-2" id="feedback-stars">
+            <button type="button" onclick="setStarRating(1)" class="p-2 border border-borderwarm bg-white hover:bg-linen-100 star-btn font-bold text-sm">⭐</button>
+            <button type="button" onclick="setStarRating(2)" class="p-2 border border-borderwarm bg-white hover:bg-linen-100 star-btn font-bold text-sm">⭐⭐</button>
+            <button type="button" onclick="setStarRating(3)" class="p-2 border border-borderwarm bg-white hover:bg-linen-100 star-btn font-bold text-sm">⭐⭐⭐</button>
+            <button type="button" onclick="setStarRating(4)" class="p-2 border border-borderwarm bg-white hover:bg-linen-100 star-btn font-bold text-sm">⭐⭐⭐⭐</button>
+            <button type="button" onclick="setStarRating(5)" class="p-2 border border-borderwarm bg-linen-200 star-btn font-bold text-sm">⭐⭐⭐⭐⭐</button>
+          </div>
+        </div>
+
+        <!-- Resolution Tag -->
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-1">Quality Assessment</label>
+          <select id="feedback-tag-select" class="w-full bg-linen-50 border border-borderwarm p-2 text-xs font-mono text-ink-900">
+            <option value="Issue fully resolved & verified on spot">Issue fully resolved & clean on spot</option>
+            <option value="Temporary repair done; permanent fix pending">Temporary repair done; permanent fix pending</option>
+            <option value="Work completed satisfactorily within SLA">Work completed satisfactorily within SLA</option>
+            <option value="Debris or residual gravel left behind">Debris or residual gravel left behind</option>
+            <option value="Unsatisfactory / defect recurring">Unsatisfactory / defect recurring</option>
+          </select>
+        </div>
+
+        <!-- Remarks -->
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-1">Citizen Remarks (Optional)</label>
+          <textarea 
+            id="feedback-remarks" 
+            rows="2" 
+            placeholder="e.g. Linemen arrived quickly and replaced the broken wire. Road was cleaned." 
+            class="w-full bg-linen-50 border border-borderwarm p-2 text-xs font-sans text-ink-900 placeholder:text-ink-400 resize-none"
+          ></textarea>
+        </div>
+
+      </div>
+
+      <div class="flex gap-2 pt-3 border-t border-borderwarm">
+        <button 
+          onclick="closeFeedbackModal()" 
+          class="py-2.5 px-4 border border-borderwarm text-ink-700 hover:bg-linen-100 font-mono text-xs uppercase font-medium">
+          Cancel
+        </button>
+        <button 
+          onclick="submitCitizenFeedback()" 
+          class="flex-1 py-2.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs font-bold uppercase tracking-wider shadow-tactile-sm">
+          Submit Citizen Verification →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-ink-950 text-linen-50 border border-ink-800 font-mono text-xs px-4 py-3 shadow-xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 pointer-events-none">
+    <i data-lucide="bell" class="w-4 h-4 text-terracotta-400"></i>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="bg-linen-100 border-t border-borderwarm text-ink-800 font-mono text-xs mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-ink-600">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 bg-ink-950"></div>
+          <span class="font-bold text-ink-900">THE URBAN FIX</span>
+          <span>— Citizen Infrastructure Redressal Network</span>
+        </div>
+        <div class="flex items-center gap-3 text-[10px]">
+          <span>Ward 174 HSR Layout</span>
+          <span>•</span>
+          <span>Municipal Helpline: 1533</span>
+          <span>•</span>
+          <span class="text-terracotta-600 font-semibold">Right to Public Service Act</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT STATE & APPLICATION BEHAVIOR                                   -->
+  <!-- ========================================================================= -->
+  <script>
+    // Storage Key for Local Data
+    const STORAGE_KEY = 'urban_fix_citizen_db_v3';
+
+    // Seed Data: Realistic Ward Community Reports & Resident Tickets
+    const initialSeedData = {
+      communityIssues: [
+        {
+          id: 'UF-2026-00142',
+          category: 'Roads & Potholes',
+          title: 'Deep 2-ft crater near 4th Cross junction',
+          description: 'Two-wheelers are skidding in the dark. Deep crater formed after recent pipe repair.',
+          location: '2nd Main & 4th Cross Rd, Sector 2, HSR Layout',
+          distance: '350m away',
+          reportedBy: 'Akash S. (You)',
+          timestamp: 'Today • 2 hours ago',
+          status: 'Field Crew Assigned',
+          statusColor: 'bg-yellow-50 text-yellow-800 border-yellow-200',
+          upvotes: 38,
+          userUpvoted: true,
+          photoUrl: 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80',
+          hasAudio: true,
+          comments: [
+            { author: 'Pooja R. (Sector 2)', text: 'I saw a scooter slip here last night. Please fix this soon!' },
+            { author: 'Vikram K. (Resident)', text: 'BBMP road roller unit was seen inspecting nearby.' }
+          ]
+        },
+        {
+          id: 'UF-2026-00141',
+          category: 'Electricity & Lights',
+          title: 'Sparking street light pole outside Sector 3 park',
+          description: 'Insulator broken and sparking when winds blow. Whole street dark for 3 days.',
+          location: 'Cross Lane 7, Sector 3, HSR Layout',
+          distance: '650m away',
+          reportedBy: 'Karthik R.',
+          timestamp: 'Yesterday',
+          status: 'Repaired (Needs Resident Sign-off)',
+          statusColor: 'bg-sky-50 text-sky-800 border-sky-200',
+          upvotes: 24,
+          userUpvoted: false,
+          photoUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb18615f8?auto=format&fit=crop&w=400&q=80',
+          hasAudio: false,
+          comments: [
+            { author: 'Ananya M.', text: 'BESCOM van #08 completed wire patching this afternoon.' }
+          ]
+        },
+        {
+          id: 'UF-2026-00140',
+          category: 'Water & Drainage',
+          title: 'Broken potable water pipeline flooding pedestrian footpath',
+          description: 'Clean drinking water gushing onto the road since 6 AM. Low pressure in nearby houses.',
+          location: '17th Cross, Sector 1, HSR Layout',
+          distance: '1.1 km away',
+          reportedBy: 'Santia L.',
+          timestamp: 'Sep 24',
+          status: 'Under Investigation',
+          statusColor: 'bg-amber-50 text-amber-800 border-amber-200',
+          upvotes: 42,
+          userUpvoted: false,
+          photoUrl: null,
+          hasAudio: true,
+          comments: [
+            { author: 'Ramesh N.', text: 'BWSSB water supply wing was notified by Ward office.' }
+          ]
+        },
+        {
+          id: 'UF-2026-00139',
+          category: 'Garbage & Waste',
+          title: 'Overflowing commercial garbage dump near school gate',
+          description: 'Wet waste not picked up for 4 days. Strong odor and stray dogs gathering around.',
+          location: '24th Main, Sector 2, HSR Layout',
+          distance: '480m away',
+          reportedBy: 'Josikaa D.',
+          timestamp: 'Sep 23',
+          status: 'Verified & Closed',
+          statusColor: 'bg-emerald-50 text-emerald-800 border-emerald-300',
+          upvotes: 56,
+          userUpvoted: true,
+          photoUrl: null,
+          hasAudio: false,
+          comments: [
+            { author: 'Health Inspector (BBMP)', text: 'Special compacting truck deployed. Area bleached and sanitized.' }
+          ]
+        }
+      ],
+      myReports: [
+        {
+          id: 'UF-2026-00142',
+          category: 'Roads & Potholes',
+          title: 'Deep 2-ft crater near 4th Cross junction',
+          description: 'Two-wheelers are skidding in the dark. Deep crater formed after recent pipe repair.',
+          location: '2nd Main & 4th Cross Rd, Sector 2, HSR Layout',
+          department: 'BBMP Road Infrastructure & Civil Works',
+          timestamp: 'Today • 14:32 IST',
+          status: 'In Progress',
+          slaTime: '18 Hours Remaining',
+          hasAudio: true,
+          hasPhoto: true,
+          photoUrl: 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80',
+          citizenAudit: null,
+          timeline: [
+            { label: 'Grievance Filed & Geotagged', time: '14:32 (Today)', done: true },
+            { label: 'Assigned to Ward 174 Civil Crew #14', time: '14:45 (Today)', done: true },
+            { label: 'Field Team Dispatched with Asphalt Unit', time: 'On the way', done: true },
+            { label: 'Physical Repair & Citizen Verification', time: 'Pending completion', done: false }
+          ]
+        },
+        {
+          id: 'UF-2026-00141',
+          category: 'Electricity & Lights',
+          title: 'Sparking street light pole outside Sector 3 park',
+          description: 'Insulator broken and sparking when winds blow. Whole street dark for 3 days.',
+          location: 'Cross Lane 7, Sector 3, HSR Layout',
+          department: 'BESCOM Electricity Distribution',
+          timestamp: 'Sep 24 • 10:15 IST',
+          status: 'Ready for Your Audit',
+          slaTime: 'Repaired by Field Crew',
+          hasAudio: false,
+          hasPhoto: true,
+          photoUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb18615f8?auto=format&fit=crop&w=400&q=80',
+          citizenAudit: null, // Ready for audit!
+          timeline: [
+            { label: 'Grievance Filed', time: '10:15 (Sep 24)', done: true },
+            { label: 'Dispatched to BESCOM Van #08', time: '11:00 (Sep 24)', done: true },
+            { label: 'Linemen Replaced Insulator & Bulb', time: '16:20 (Sep 24)', done: true },
+            { label: 'Waiting for Citizen Verification Sign-off', time: 'Action needed below', done: false }
+          ]
+        },
+        {
+          id: 'UF-2026-00135',
+          category: 'Water & Drainage',
+          title: 'Stagnant rainwater drain blockage',
+          description: 'Silt accumulation blocking side drain flow during heavy rain.',
+          location: '8th Main, Sector 2, HSR Layout',
+          department: 'BWSSB Sanitary Wing',
+          timestamp: 'Sep 20 • 09:10 IST',
+          status: 'Completed & Verified',
+          slaTime: 'Closed',
+          hasAudio: true,
+          hasPhoto: false,
+          citizenAudit: {
+            rating: 5,
+            tag: 'Issue fully resolved & verified on spot',
+            remarks: 'Silt removed thoroughly and water flows freely now.',
+            date: 'Sep 21 • 15:40 IST'
+          },
+          timeline: [
+            { label: 'Grievance Filed', time: '09:10 (Sep 20)', done: true },
+            { label: 'Sanitary Crew Assigned', time: '10:30 (Sep 20)', done: true },
+            { label: 'Drain Desilted & Jet Cleaned', time: '14:00 (Sep 21)', done: true },
+            { label: 'Citizen Verified (5 Stars)', time: '15:40 (Sep 21)', done: true }
+          ]
+        }
+      ]
+    };
+
+    // Active App State
+    let appData = { ...initialSeedData };
+    let currentTab = 'report';
+    let communityFilter = 'all';
+    let myReportsFilter = 'all';
+
+    // Voice recording simulation state
+    let isRecordingVoice = false;
+    let voiceSeconds = 0;
+    let voiceInterval = null;
+    let recordedVoiceReady = false;
+
+    // Active audit ticket
+    let activeAuditId = null;
+    let currentStarRating = 5;
+
+    // Load data from localStorage
+    function loadData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          appData = JSON.parse(saved);
+        } else {
+          appData = initialSeedData;
+          saveData();
+        }
+      } catch (e) {
+        appData = initialSeedData;
+      }
+      updateNavPills();
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      } catch (e) {
+        console.error('Failed to save to localStorage:', e);
+      }
+      updateNavPills();
+    }
+
+    function updateNavPills() {
+      const commCount = document.getElementById('community-badge-count');
+      const myCount = document.getElementById('myreports-count-pill');
+      const myCountAll = document.getElementById('my-count-all');
+      
+      if (commCount) commCount.textContent = appData.communityIssues.length;
+      if (myCount) myCount.textContent = appData.myReports.length;
+      if (myCountAll) myCountAll.textContent = appData.myReports.length;
+    }
+
+    // Switch Main Navigation Tabs (Report | Community | My Reports)
+    function switchNavTab(tabName) {
+      currentTab = tabName;
+      
+      // Hide all main sections
+      document.getElementById('view-report').classList.add('hidden');
+      document.getElementById('view-community').classList.add('hidden');
+      document.getElementById('view-myreports').classList.add('hidden');
+
+      // Reset button styles
+      ['report', 'community', 'myreports'].forEach(t => {
+        const btn = document.getElementById(`nav-tab-${t}`);
+        if (btn) {
+          btn.className = 'px-3 sm:px-4 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5';
+        }
+      });
+
+      // Activate selected
+      const targetSec = document.getElementById(`view-${tabName}`);
+      const targetBtn = document.getElementById(`nav-tab-${tabName}`);
+      
+      if (targetSec) targetSec.classList.remove('hidden');
+      if (targetBtn) {
+        targetBtn.className = 'px-3 sm:px-4 py-1.5 rounded font-bold bg-ink-950 text-linen-50 transition flex items-center gap-1.5';
+      }
+
+      if (tabName === 'community') renderCommunityFeed();
+      if (tabName === 'myreports') renderMyReports();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    // Category Selection Handler
+    function selectCategory(input) {
+      document.querySelectorAll('.category-choice').forEach(box => {
+        box.classList.remove('border-ink-950', 'bg-linen-100', 'font-bold', 'shadow-tactile-sm');
+        box.classList.add('border-borderwarm', 'bg-linen-50', 'font-medium');
+      });
+      input.closest('.category-choice').classList.add('border-ink-950', 'bg-linen-100', 'font-bold', 'shadow-tactile-sm');
+      input.closest('.category-choice').classList.remove('border-borderwarm', 'bg-linen-50', 'font-medium');
+      updateRoutingBadge();
+    }
+
+    // Automatic Routing Preview (Friendly & Non-intrusive)
+    function updateRoutingBadge() {
+      const cat = document.querySelector('input[name="report-category"]:checked')?.value || 'Roads & Potholes';
+      const desc = (document.getElementById('input-description')?.value || '').toLowerCase();
+      
+      let dept = 'BBMP Road Infrastructure & Civil Works';
+      let sla = 'Within 24 Hours';
+
+      if (cat.includes('Electricity') || desc.includes('spark') || desc.includes('wire') || desc.includes('light') || desc.includes('shock')) {
+        dept = 'BESCOM Electricity Distribution';
+        sla = 'Within 12 Hours (High Priority)';
+      } else if (cat.includes('Water') || desc.includes('leak') || desc.includes('drain') || desc.includes('sewage') || desc.includes('pipe')) {
+        dept = 'BWSSB Potable Water & Sanitary Wing';
+        sla = 'Within 24 Hours';
+      } else if (cat.includes('Garbage') || desc.includes('waste') || desc.includes('trash') || desc.includes('smell') || desc.includes('dump')) {
+        dept = 'BBMP Solid Waste Management Division';
+        sla = 'Within 24 Hours';
+      }
+
+      document.getElementById('auto-routed-dept').textContent = dept;
+      document.getElementById('auto-sla-time').textContent = sla;
+    }
+
+    // GPS Auto Detection
+    function detectCitizenLocation() {
+      showToast('Finding your current Ward coordinates...');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude.toFixed(4);
+            const lng = pos.coords.longitude.toFixed(4);
+            document.getElementById('gps-coords-text').textContent = `${lat}° N, ${lng}° E`;
+            document.getElementById('input-location').value = `Sector 2, HSR Layout (GPS: ${lat}, ${lng})`;
+            showToast(`Location locked: ${lat}° N, ${lng}° E`);
+            updateRoutingBadge();
+          },
+          (err) => {
+            document.getElementById('gps-coords-text').textContent = '12.9121° N, 77.6446° E';
+            document.getElementById('input-location').value = '4th Cross Road, Sector 2, HSR Layout, Bengaluru';
+            showToast('HSR Layout Sector 2 benchmark geocode loaded');
+          }
+        );
+      }
+    }
+
+    // Voice Dictation Recording
+    function toggleVoiceRecording() {
+      const btn = document.getElementById('btn-voice-record');
+      const label = document.getElementById('voice-label');
+      const dot = document.getElementById('voice-dot');
+      const waveWrapper = document.getElementById('wave-bars-wrapper');
+      const previewPill = document.getElementById('voice-preview-pill');
+
+      if (!isRecordingVoice) {
+        isRecordingVoice = true;
+        label.textContent = 'Stop Dictation';
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-red-600 animate-ping';
+        btn.className = 'w-full sm:w-auto px-4 py-2 bg-terracotta-700 hover:bg-terracotta-800 text-linen-50 font-mono text-xs uppercase font-bold flex items-center justify-center gap-2 transition';
+        
+        waveWrapper.querySelectorAll('div').forEach(bar => {
+          bar.className = 'w-1 bg-terracotta-600 wave-bar';
+        });
+
+        voiceSeconds = 0;
+        voiceInterval = setInterval(() => {
+          voiceSeconds++;
+          const mins = String(Math.floor(voiceSeconds / 60)).padStart(2, '0');
+          const secs = String(voiceSeconds % 60).padStart(2, '0');
+          document.getElementById('voice-timer').textContent = `${mins}:${secs}`;
+        }, 1000);
+
+        showToast('Listening... Speak your issue clearly.');
+      } else {
+        isRecordingVoice = false;
+        clearInterval(voiceInterval);
+        label.textContent = 'Record Voice Note';
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-terracotta-500';
+        btn.className = 'w-full sm:w-auto px-4 py-2 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold flex items-center justify-center gap-2 transition shadow-tactile-sm';
+        
+        waveWrapper.querySelectorAll('div').forEach(bar => {
+          bar.className = 'w-1 bg-ink-400 h-3';
+        });
+
+        recordedVoiceReady = true;
+        previewPill.classList.remove('hidden');
+        showToast('Voice note captured & ready!');
+      }
+      lucide.createIcons();
+    }
+
+    function appendVoiceTranscript() {
+      const note = " [Voice Transcript]: Large cavity in the road blocking traffic; requires urgent leveling and tar patching.";
+      const desc = document.getElementById('input-description');
+      desc.value += note;
+      updateRoutingBadge();
+      showToast('Voice note added to your description.');
+    }
+
+    function playVoiceSimulation() {
+      const icon = document.getElementById('voice-play-icon');
+      icon.setAttribute('data-lucide', 'square');
+      lucide.createIcons();
+      showToast('Playing voice note audio...');
+      setTimeout(() => {
+        icon.setAttribute('data-lucide', 'play');
+        lucide.createIcons();
+      }, 2500);
+    }
+
+    // Photo Upload Handling
+    let uploadedPhotoUrl = 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=300&q=80';
+
+    function handleImageSelection(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          uploadedPhotoUrl = evt.target.result;
+          document.getElementById('photo-preview-image').src = evt.target.result;
+          document.getElementById('photo-filename-label').textContent = file.name;
+          document.getElementById('photo-display-title').textContent = file.name;
+          document.getElementById('photo-preview-box').classList.remove('hidden');
+          showToast(`Photo attached: ${file.name}`);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removePhoto() {
+      uploadedPhotoUrl = null;
+      document.getElementById('photo-preview-box').classList.add('hidden');
+      document.getElementById('photo-filename-label').textContent = 'No photo attached';
+      showToast('Photo removed.');
+    }
+
+    // Citizen Form Submit
+    function handleCitizenSubmit(e) {
+      e.preventDefault();
+
+      const category = document.querySelector('input[name="report-category"]:checked')?.value || 'Roads & Potholes';
+      const location = document.getElementById('input-location').value;
+      const description = document.getElementById('input-description').value;
+      const dept = document.getElementById('auto-routed-dept').textContent;
+      const sla = document.getElementById('auto-sla-time').textContent;
+
+      const randomNum = Math.floor(100 + Math.random() * 900);
+      const ticketId = 'UF-2026-00' + randomNum;
+
+      // Create new ticket for My Reports
+      const newMyReport = {
+        id: ticketId,
+        category: category,
+        title: description.slice(0, 48) + '...',
+        description: description,
+        location: location,
+        department: dept,
+        timestamp: 'Just now • ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        status: 'In Progress',
+        slaTime: sla,
+        hasAudio: recordedVoiceReady,
+        hasPhoto: !!uploadedPhotoUrl,
+        photoUrl: uploadedPhotoUrl,
+        citizenAudit: null,
+        timeline: [
+          { label: 'Grievance Filed & Geotagged', time: 'Just now', done: true },
+          { label: `Assigned to ${dept}`, time: 'Immediate', done: true },
+          { label: 'Field Crew Dispatch Queued', time: 'In progress', done: false },
+          { label: 'Physical Repair & Citizen Sign-off', time: 'Pending completion', done: false }
+        ]
+      };
+
+      // Also create an entry in Community Feed so neighbors can see & upvote
+      const newCommunityIssue = {
+        id: ticketId,
+        category: category,
+        title: description.slice(0, 48) + '...',
+        description: description,
+        location: location,
+        distance: 'Nearby (Your street)',
+        reportedBy: 'Akash S. (You)',
+        timestamp: 'Just now',
+        status: 'Field Crew Dispatched',
+        statusColor: 'bg-yellow-50 text-yellow-800 border-yellow-200',
+        upvotes: 1,
+        userUpvoted: true,
+        photoUrl: uploadedPhotoUrl,
+        hasAudio: recordedVoiceReady,
+        comments: [
+          { author: 'Municipal Bot', text: `Dispatched to ${dept}. Tracking token: #${ticketId}` }
+        ]
+      };
+
+      appData.myReports.unshift(newMyReport);
+      appData.communityIssues.unshift(newCommunityIssue);
+      saveData();
+
+      // Show Success Dialog
+      document.getElementById('succ-modal-token').textContent = '#' + ticketId;
+      document.getElementById('succ-modal-cat').textContent = category;
+      document.getElementById('succ-modal-dept').textContent = dept;
+      document.getElementById('modal-report-success').classList.remove('hidden');
+    }
+
+    function closeSuccessModalTo(dest) {
+      document.getElementById('modal-report-success').classList.add('hidden');
+      switchNavTab(dest);
+    }
+
+    // =========================================================================
+    // COMMUNITY FEED LOGIC (DUPLICATE AVOIDANCE & UPVOTES)
+    // =========================================================================
+    function filterCommunity(cat) {
+      communityFilter = cat;
+      document.querySelectorAll('.comm-filter-btn').forEach(btn => {
+        btn.className = 'comm-filter-btn px-3 py-1 bg-linen-100 hover:bg-linen-200 text-ink-800 rounded';
+      });
+      event.currentTarget.className = 'comm-filter-btn px-3 py-1 bg-ink-950 text-linen-50 font-bold rounded';
+      renderCommunityFeed();
+    }
+
+    function renderCommunityFeed() {
+      const container = document.getElementById('community-feed-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let items = appData.communityIssues;
+      if (communityFilter !== 'all') {
+        items = items.filter(it => it.category.toLowerCase().includes(communityFilter.toLowerCase()));
+      }
+
+      document.getElementById('comm-visible-count').textContent = items.length;
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="border border-borderwarm bg-white p-12 text-center font-mono">
+            <i data-lucide="info" class="w-8 h-8 text-ink-400 mx-auto mb-2"></i>
+            <h4 class="font-display font-bold text-ink-950">No reports in this category</h4>
+            <p class="text-xs text-ink-500 mt-1">Be the first to report an issue in your ward.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      items.forEach(issue => {
+        const card = document.createElement('div');
+        card.className = 'border border-borderwarm bg-white p-5 sm:p-6 shadow-subtle hover:border-ink-800 transition space-y-4';
+
+        const commentsHtml = issue.comments.map(c => `
+          <div class="text-[11px] font-sans text-ink-700 bg-linen-50 border border-borderwarm p-2 rounded">
+            <strong class="font-mono text-ink-900">${c.author}:</strong> ${c.text}
+          </div>
+        `).join('');
+
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderwarm pb-3">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs font-bold text-ink-950">#${issue.id}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 bg-linen-100 border border-borderwarm text-ink-800 font-semibold">${issue.category}</span>
+              <span class="text-[10px] font-mono text-ink-500">• ${issue.timestamp}</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono px-2 py-0.5 border rounded font-semibold ${issue.statusColor || 'bg-linen-100 text-ink-800'}">
+                ${issue.status}
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+            
+            ${issue.photoUrl ? `
+              <div class="sm:col-span-3">
+                <div class="w-full h-28 bg-linen-200 border border-borderwarm overflow-hidden">
+                  <img src="${issue.photoUrl}" alt="${issue.title}" class="w-full h-full object-cover">
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="${issue.photoUrl ? 'sm:col-span-9' : 'sm:col-span-12'} space-y-2">
+              <h3 class="font-display font-bold text-base text-ink-950">${issue.title}</h3>
+              <p class="text-xs text-ink-700 font-sans leading-relaxed">${issue.description}</p>
+              
+              <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-ink-600 pt-1">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-terracotta-600"></i>
+                  <span>${issue.location} (${issue.distance})</span>
+                </span>
+                <span class="text-ink-400">Reported by: <strong class="text-ink-800">${issue.reportedBy}</strong></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Community Action Bar: UPVOTES / ME TOO + Comments -->
+          <div class="pt-3 border-t border-borderwarm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            
+            <div class="flex items-center gap-3">
+              <!-- Upvote Button -->
+              <button 
+                onclick="toggleUpvote('${issue.id}')" 
+                class="px-3.5 py-1.5 border ${issue.userUpvoted ? 'bg-terracotta-600 text-white border-terracotta-700 font-bold' : 'bg-linen-100 hover:bg-linen-200 border-borderwarm text-ink-800 font-medium'} text-xs font-mono rounded flex items-center gap-2 transition shadow-tactile-sm">
+                <i data-lucide="arrow-big-up" class="w-4 h-4 ${issue.userUpvoted ? 'fill-white' : ''}"></i>
+                <span>I'm Affected Too (+1)</span>
+                <span class="ml-1 px-1.5 py-0.2 ${issue.userUpvoted ? 'bg-white/20 text-white' : 'bg-linen-200 text-ink-900'} rounded font-bold">${issue.upvotes}</span>
+              </button>
+
+              <span class="text-[11px] font-mono text-ink-500">
+                ${issue.upvotes > 20 ? '🔥 High Ward Priority' : 'Community Reported'}
+              </span>
+            </div>
+
+            <!-- Toggle Comments -->
+            <button 
+              onclick="toggleCardComments('${issue.id}')" 
+              class="text-xs font-mono text-ink-600 hover:text-ink-950 flex items-center gap-1.5 self-start sm:self-auto">
+              <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+              <span>Comments (${issue.comments.length})</span>
+            </button>
+
+          </div>
+
+          <!-- Expandable Comments Drawer -->
+          <div id="comments-box-${issue.id}" class="hidden pt-3 border-t border-borderwarm space-y-2.5">
+            <div class="space-y-1.5">
+              ${commentsHtml}
+            </div>
+
+            <!-- Add Comment Input -->
+            <div class="flex gap-2 pt-1">
+              <input 
+                type="text" 
+                id="comment-input-${issue.id}" 
+                placeholder="Share a neighborhood update..." 
+                class="flex-1 px-3 py-1.5 bg-linen-50 border border-borderwarm font-sans text-xs text-ink-900 placeholder:text-ink-400"
+              />
+              <button 
+                onclick="postCommunityComment('${issue.id}')" 
+                class="px-3 py-1.5 bg-ink-950 text-linen-50 font-mono text-xs font-bold uppercase hover:bg-black transition">
+                Post
+              </button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function toggleUpvote(id) {
+      const issue = appData.communityIssues.find(i => i.id === id);
+      if (issue) {
+        if (issue.userUpvoted) {
+          issue.userUpvoted = false;
+          issue.upvotes--;
+          showToast(`Upvote removed for #${id}`);
+        } else {
+          issue.userUpvoted = true;
+          issue.upvotes++;
+          showToast(`+1 Added! Notified authorities of higher neighborhood impact.`);
+        }
+        saveData();
+        renderCommunityFeed();
+      }
+    }
+
+    function toggleCardComments(id) {
+      const box = document.getElementById(`comments-box-${id}`);
+      if (box) {
+        box.classList.toggle('hidden');
+      }
+    }
+
+    function postCommunityComment(id) {
+      const input = document.getElementById(`comment-input-${id}`);
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+
+      const issue = appData.communityIssues.find(i => i.id === id);
+      if (issue) {
+        issue.comments.push({
+          author: 'Akash S. (Resident)',
+          text: text
+        });
+        saveData();
+        renderCommunityFeed();
+        showToast('Comment posted to neighborhood thread.');
+      }
+    }
+
+    // =========================================================================
+    // MY REPORTS & TRACKING LOGIC (TIMELINE & CITIZEN AUDIT)
+    // =========================================================================
+    function filterMyReports(filter) {
+      myReportsFilter = filter;
+      document.querySelectorAll('.my-filter-btn').forEach(btn => {
+        btn.className = 'my-filter-btn px-3.5 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800';
+      });
+      event.currentTarget.className = 'my-filter-btn px-3.5 py-1.5 bg-ink-950 text-linen-50 font-bold shadow-tactile-sm';
+      renderMyReports();
+    }
+
+    function renderMyReports() {
+      const container = document.getElementById('my-reports-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let items = appData.myReports.filter(rep => {
+        if (myReportsFilter === 'active') return rep.status === 'In Progress';
+        if (myReportsFilter === 'ready_audit') return rep.status === 'Ready for Your Audit';
+        if (myReportsFilter === 'completed') return rep.status === 'Completed & Verified';
+        return true;
+      });
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="border border-borderwarm bg-white p-12 text-center font-mono">
+            <i data-lucide="check-circle" class="w-8 h-8 text-ink-400 mx-auto mb-2"></i>
+            <h4 class="font-display font-bold text-ink-950">No tickets found in this tab</h4>
+            <p class="text-xs text-ink-500 mt-1">File an issue anytime to start tracking its field progress.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      items.forEach(rep => {
+        const card = document.createElement('div');
+        card.className = 'border border-borderwarm bg-white p-6 shadow-subtle hover:border-ink-800 transition space-y-5';
+
+        // Timeline Items
+        const timelineHtml = rep.timeline.map((step, idx) => `
+          <div class="flex items-start gap-2.5 text-xs font-mono">
+            <div class="mt-1">
+              <span class="w-2.5 h-2.5 rounded-full block ${step.done ? 'bg-terracotta-600' : 'bg-ink-300 border border-borderwarm'}"></span>
+            </div>
+            <div class="flex-1 flex flex-col sm:flex-row sm:justify-between gap-0.5">
+              <span class="${step.done ? 'text-ink-900 font-semibold' : 'text-ink-400'}">${step.label}</span>
+              <span class="text-[10px] text-ink-400">${step.time}</span>
+            </div>
+          </div>
+        `).join('');
+
+        // Status Badge Style
+        let badgeStyle = 'bg-yellow-50 text-yellow-800 border-yellow-200';
+        if (rep.status === 'Ready for Your Audit') badgeStyle = 'bg-sky-50 text-sky-800 border-sky-300 font-bold';
+        if (rep.status === 'Completed & Verified') badgeStyle = 'bg-emerald-50 text-emerald-800 border-emerald-300 font-bold';
+
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderwarm pb-3">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-sm font-bold text-ink-950">#${rep.id}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 bg-linen-100 border border-borderwarm text-ink-800 font-semibold">${rep.department}</span>
+              <span class="text-[10px] font-mono text-ink-500">• ${rep.timestamp}</span>
+            </div>
+            <div>
+              <span class="text-xs font-mono px-2.5 py-1 border rounded ${badgeStyle}">
+                ${rep.status === 'Completed & Verified' ? '✓ ' + rep.status : rep.status}
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-7 space-y-3">
+              <div>
+                <span class="font-mono text-[10px] text-ink-400 uppercase tracking-widest font-semibold">${rep.category}</span>
+                <p class="font-sans text-xs text-ink-800 leading-relaxed mt-0.5 font-medium">${rep.description}</p>
+              </div>
+
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-600">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-terracotta-600"></i>
+                <span class="truncate">${rep.location}</span>
+              </div>
+
+              <div class="flex items-center gap-3 pt-1">
+                ${rep.hasAudio ? `
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-linen-100 border border-borderwarm text-[10px] font-mono text-ink-800">
+                    <i data-lucide="volume-2" class="w-3 h-3 text-terracotta-600"></i>
+                    <span>Voice Memo Attached</span>
+                  </span>
+                ` : ''}
+
+                ${rep.hasPhoto && rep.photoUrl ? `
+                  <a href="${rep.photoUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-linen-100 border border-borderwarm text-[10px] font-mono text-ink-800 hover:border-ink-950 transition">
+                    <i data-lucide="image" class="w-3 h-3 text-terracotta-600"></i>
+                    <span>View Defect Photo</span>
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Right Timeline & Audit Action -->
+            <div class="lg:col-span-5 bg-linen-50 border border-borderwarm p-4 space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[10px] font-mono uppercase text-ink-500 font-bold">Progress Timeline</span>
+                  <span class="text-[10px] font-mono text-ink-600 font-semibold">${rep.slaTime}</span>
+                </div>
+                <div class="space-y-2 mt-2">
+                  ${timelineHtml}
+                </div>
+              </div>
+
+              <!-- Action Area -->
+              <div class="pt-3 border-t border-borderwarm">
+                ${rep.status === 'Ready for Your Audit' && !rep.citizenAudit ? `
+                  <div class="space-y-2">
+                    <div class="text-[10px] font-mono text-sky-900 bg-sky-50 p-2 border border-sky-200">
+                      <strong>Repaired by Field Crew:</strong> Please inspect the site and submit your satisfaction rating.
+                    </div>
+                    <button 
+                      type="button" 
+                      onclick="openFeedbackModal('${rep.id}')" 
+                      class="w-full py-2 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs font-bold uppercase tracking-wider shadow-tactile-sm transition flex items-center justify-center gap-1.5">
+                      <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400"></i>
+                      <span>Audit & Verify Repair →</span>
+                    </button>
+                  </div>
+                ` : rep.citizenAudit ? `
+                  <div class="bg-emerald-50 border border-emerald-200 p-2.5 font-mono text-xs text-emerald-950 space-y-1">
+                    <div class="flex justify-between items-center">
+                      <span class="font-bold flex items-center gap-1 text-[11px]">
+                        <span>Citizen Verified:</span>
+                        <span class="text-amber-500">${'★'.repeat(rep.citizenAudit.rating)}</span>
+                      </span>
+                      <span class="text-[9px] text-emerald-700">${rep.citizenAudit.date}</span>
+                    </div>
+                    <div class="text-[10px] font-semibold text-emerald-800">${rep.citizenAudit.tag}</div>
+                    <p class="text-[11px] font-sans text-ink-700 italic">"${rep.citizenAudit.remarks}"</p>
+                  </div>
+                ` : `
+                  <div class="flex items-center justify-between text-[10px] font-mono text-ink-500">
+                    <span>Field operations underway</span>
+                    <button onclick="simulateFieldCompletion('${rep.id}')" class="text-terracotta-600 hover:underline font-bold">
+                      [Simulate Crew Completion]
+                    </button>
+                  </div>
+                `}
+              </div>
+
+            </div>
+
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Simulate Field Crew Finishing Work
+    function simulateFieldCompletion(id) {
+      const rep = appData.myReports.find(r => r.id === id);
+      if (rep) {
+        rep.status = 'Ready for Your Audit';
+        rep.timeline[2] = { label: 'Field Repair Completed on Site', time: 'Just now', done: true };
+        rep.timeline[3] = { label: 'Waiting for Citizen Verification Sign-off', time: 'Action needed below', done: false };
+        
+        // Also update community status
+        const comm = appData.communityIssues.find(c => c.id === id);
+        if (comm) {
+          comm.status = 'Repaired (Needs Resident Sign-off)';
+          comm.statusColor = 'bg-sky-50 text-sky-800 border-sky-200';
+        }
+
+        saveData();
+        renderMyReports();
+        showToast(`Crew finished work for #${id}! Ready for your audit.`);
+      }
+    }
+
+    // Citizen Feedback Modal
+    function openFeedbackModal(id) {
+      activeAuditId = id;
+      document.getElementById('feedback-title').textContent = `Verify Resolution for #${id}`;
+      document.getElementById('feedback-remarks').value = '';
+      setStarRating(5);
+      document.getElementById('modal-feedback').classList.remove('hidden');
+    }
+
+    function closeFeedbackModal() {
+      document.getElementById('modal-feedback').classList.add('hidden');
+    }
+
+    function setStarRating(stars) {
+      currentStarRating = stars;
+      document.querySelectorAll('.star-btn').forEach((btn, idx) => {
+        if (idx < stars) {
+          btn.className = 'p-2 border border-borderwarm bg-linen-200 star-btn font-bold text-sm';
+        } else {
+          btn.className = 'p-2 border border-borderwarm bg-white hover:bg-linen-100 star-btn font-bold text-sm';
+        }
+      });
+    }
+
+    function submitCitizenFeedback() {
+      const rep = appData.myReports.find(r => r.id === activeAuditId);
+      if (rep) {
+        const tag = document.getElementById('feedback-tag-select').value;
+        const remarks = document.getElementById('feedback-remarks').value.trim() || 'Work inspected on site.';
+
+        rep.status = 'Completed & Verified';
+        rep.citizenAudit = {
+          rating: currentStarRating,
+          tag: tag,
+          remarks: remarks,
+          date: 'Just now • ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+        };
+
+        rep.timeline[3] = {
+          label: `Citizen Verified (${currentStarRating} Stars) - Docket Closed`,
+          time: 'Just now',
+          done: true
+        };
+
+        // Update community card too
+        const comm = appData.communityIssues.find(c => c.id === activeAuditId);
+        if (comm) {
+          comm.status = 'Verified & Closed';
+          comm.statusColor = 'bg-emerald-50 text-emerald-800 border-emerald-300';
+          comm.comments.push({
+            author: 'Akash S. (Reporting Citizen)',
+            text: `Certified resolution: ${currentStarRating} Stars ("${remarks}")`
+          });
+        }
+
+        saveData();
+        renderMyReports();
+        closeFeedbackModal();
+        showToast(`Verification for #${rep.id} certified. Thank you for improving our ward!`);
+      }
+    }
+
+    // Toast Utility
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      text.textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    // On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      updateRoutingBadge();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

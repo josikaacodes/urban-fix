@@ -6,3 +6,11 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Large ML Weights (Laya) & Cache
+laya/
+*.safetensors
+*.bin
+*.onnx
+.cache/
+*.db

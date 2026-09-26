@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Ticket, CitizenAuditFeedback, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
+import { CommunityFeedView } from './CommunityFeedView';
 
 interface CitizenPortalViewProps {
   tickets: Ticket[];
@@ -32,6 +33,7 @@ export const CitizenPortalView: React.FC<CitizenPortalViewProps> = ({
   const t = TRANSLATIONS[language];
   const [showReportForm, setShowReportForm] = useState(initialOpenReport);
   const [selectedAuditTicket, setSelectedAuditTicket] = useState<Ticket | null>(null);
+  const [citizenSubTab, setCitizenSubTab] = useState<'tickets' | 'community'>('tickets');
 
   // Intake Form States
   const [description, setDescription] = useState('');
@@ -613,15 +615,52 @@ export const CitizenPortalView: React.FC<CitizenPortalViewProps> = ({
         </div>
       )}
 
-      {/* ================= SECTION B: MY GRIEVANCE DOCKETS FEED ================= */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-headline text-lg font-bold text-[#051c11]">{t.docketsFeedTitle}</h3>
-            <span className="font-mono text-xs text-[#727973]">
-              Chronological complaint feed with two-way audit gates
-            </span>
-          </div>
+      {/* ================= SUB-NAVIGATION: MY TICKETS VS NEIGHBORHOOD COMMUNITY FEED ================= */}
+      <div className="flex border-b border-[#ece8df] gap-2 pt-2">
+        <button
+          type="button"
+          onClick={() => setCitizenSubTab('tickets')}
+          className={`px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-1.5 cursor-pointer ${
+            citizenSubTab === 'tickets'
+              ? 'border-[#051c11] text-[#051c11] bg-white rounded-t-xl shadow-xs'
+              : 'border-transparent text-[#727973] hover:text-[#051c11]'
+          }`}
+        >
+          <span className="material-symbols-outlined text-[16px]">assignment</span>
+          <span>My Registered Tickets ({tickets.length})</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setCitizenSubTab('community')}
+          className={`px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-1.5 cursor-pointer ${
+            citizenSubTab === 'community'
+              ? 'border-[#051c11] text-[#051c11] bg-white rounded-t-xl shadow-xs'
+              : 'border-transparent text-[#727973] hover:text-[#051c11]'
+          }`}
+        >
+          <span className="material-symbols-outlined text-[16px]">groups</span>
+          <span>Neighborhood Community Feed</span>
+          <span className="px-1.5 py-0.2 bg-[#a43711] text-white rounded-full text-[10px] font-bold">New</span>
+        </button>
+      </div>
+
+      {citizenSubTab === 'community' ? (
+        <CommunityFeedView
+          onOpenReportModal={onOpenReportModal || (() => setShowReportForm(true))}
+          onToast={onToast}
+          residentWard={residentWard}
+        />
+      ) : (
+        /* ================= SECTION B: MY GRIEVANCE DOCKETS FEED ================= */
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-headline text-lg font-bold text-[#051c11]">{t.docketsFeedTitle}</h3>
+              <span className="font-mono text-xs text-[#727973]">
+                Chronological complaint feed with two-way audit gates
+              </span>
+            </div>
           <span className="font-mono text-xs text-[#4c6451] font-semibold">
             {tickets.length} Registered Dockets
           </span>
@@ -785,6 +824,7 @@ export const CitizenPortalView: React.FC<CitizenPortalViewProps> = ({
           })}
         </div>
       </div>
+      )}
 
       {/* ================= CITIZEN AUDIT MODAL ================= */}
       {selectedAuditTicket && (

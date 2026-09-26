@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Urban Fix — Municipal Authority & Zonal Operations Desk</title>
+  
+  <!-- Fonts: Space Grotesk (Display), DM Sans (Neutral Body), JetBrains Mono (Technical/Metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen: {
+              50: '#FBF9F5',
+              100: '#F4EFE6',
+              200: '#E8E1D5',
+              300: '#D6CDC0',
+              400: '#C2B6A3',
+            },
+            ink: {
+              950: '#0F0E0D',
+              900: '#181716',
+              800: '#272523',
+              700: '#3D3A37',
+              600: '#524F4A',
+              500: '#69645E',
+              400: '#948E85',
+              300: '#BFB9AE',
+              200: '#DCD7CE',
+            },
+            terracotta: {
+              400: '#E26D40',
+              500: '#D95A2B',
+              600: '#C2471B',
+              700: '#A43711',
+              800: '#83280B',
+            },
+            borderwarm: '#DFD8CC',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px rgba(24, 23, 22, 0.05), 0 1px 2px rgba(24, 23, 22, 0.03)',
+            'elevated': '0 4px 16px -2px rgba(24, 23, 22, 0.08), 0 2px 6px -1px rgba(24, 23, 22, 0.04)',
+            'tactile': '2px 2px 0px #181716',
+            'tactile-sm': '1px 1px 0px #181716',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Architectural subtle blueprint civic grid */
+    .civic-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(24, 23, 22, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(24, 23, 22, 0.035) 1px, transparent 1px);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #181716 !important;
+      box-shadow: 0 0 0 1px #181716;
+    }
+
+    /* Pulse beacon for emergency P1 tickets */
+    @keyframes alertPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.08); }
+    }
+    .beacon-pulse {
+      animation: alertPulse 1.8s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-[#FBF9F5] text-ink-900 font-sans antialiased selection:bg-terracotta-600 selection:text-white min-h-screen flex flex-col">
+
+  <!-- ========================================================================= -->
+  <!-- TOP DUAL-ROLE BAR: INSTANT SWITCH TO CITIZEN PORTAL                       -->
+  <!-- ========================================================================= -->
+  <div class="bg-ink-950 text-linen-100 text-[11px] font-mono px-4 py-1.5 border-b border-ink-800 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-linen-300">ZONAL COMMAND DESK:</span>
+      <strong class="text-linen-50">Ward 174 (HSR Layout) Municipal Command Center</strong>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="text-terracotta-400 hover:text-terracotta-300 flex items-center gap-1.5 font-bold transition">
+        <span>← Switch to Citizen View</span>
+      </a>
+      <span class="text-ink-700">|</span>
+      <span class="text-ink-400">Officer: Er. R. S. Sharma (Executive Engineer)</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TOP AUTHORITY HEADER                                                      -->
+  <!-- ========================================================================= -->
+  <header class="border-b border-borderwarm bg-[#FBF9F5]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Operations Center -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 bg-terracotta-600 text-linen-50 flex items-center justify-center font-mono font-bold text-sm tracking-tighter border border-terracotta-700 shadow-tactile-sm">
+          HQ
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-bold text-lg uppercase tracking-tight text-ink-950">Urban Fix Operations</span>
+            <span class="px-1.5 py-0.2 bg-linen-200 border border-borderwarm text-[9px] font-mono uppercase font-semibold text-ink-800">Authority Desk</span>
+          </div>
+          <div class="flex items-center gap-2 font-mono text-[10px] text-ink-500 uppercase tracking-wider">
+            <span>BBMP • BESCOM • BWSSB Unified Dispatch</span>
+            <span class="text-ink-300">•</span>
+            <span class="text-emerald-700 font-bold">14 Crews On-Duty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs: Dockets | Duplicate Detection | Crew Dispatch | Ward Analytics -->
+      <nav class="flex items-center bg-linen-100 p-1 border border-borderwarm rounded text-xs font-mono">
+        <button 
+          id="tab-btn-dockets" 
+          onclick="switchAuthorityTab('dockets')" 
+          class="px-3.5 py-1.5 rounded font-bold bg-ink-950 text-linen-50 transition flex items-center gap-1.5">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-terracotta-400"></i>
+          <span>Live Dockets</span>
+          <span id="badge-total-dockets" class="ml-1 px-1.5 py-0.2 bg-terracotta-600 text-white rounded-full text-[9px]">4</span>
+        </button>
+
+        <button 
+          id="tab-btn-duplicates" 
+          onclick="switchAuthorityTab('duplicates')" 
+          class="px-3.5 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span>Duplicate Clusters</span>
+          <span class="ml-1 px-1.5 py-0.2 bg-amber-200 text-amber-900 border border-amber-300 rounded text-[9px] font-bold">1 Hotspot</span>
+        </button>
+
+        <button 
+          id="tab-btn-crews" 
+          onclick="switchAuthorityTab('crews')" 
+          class="px-3.5 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5">
+          <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+          <span>Field Crews</span>
+        </button>
+
+        <button 
+          id="tab-btn-analytics" 
+          onclick="switchAuthorityTab('analytics')" 
+          class="px-3.5 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5">
+          <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i>
+          <span>SLA & Audit Index</span>
+        </button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN AUTHORITY CONTENT                                                    -->
+  <!-- ========================================================================= -->
+  <main class="flex-grow civic-grid py-8 sm:py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+
+      <!-- Executive KPI Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <div class="bg-white border border-borderwarm p-4 shadow-subtle">
+          <span class="font-mono text-[10px] uppercase text-ink-500 font-bold block mb-1">Active Incident Dockets</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-display font-bold text-ink-950" id="kpi-active-count">3</span>
+            <span class="text-[10px] font-mono text-terracotta-600 font-semibold">1 Critical (P1)</span>
+          </div>
+          <span class="text-[10px] font-mono text-ink-400 block mt-1">Ward 174 jurisdiction</span>
+        </div>
+
+        <div class="bg-white border border-borderwarm p-4 shadow-subtle">
+          <span class="font-mono text-[10px] uppercase text-ink-500 font-bold block mb-1">Average SLA Compliance</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-display font-bold text-emerald-700">92.4%</span>
+            <span class="text-[10px] font-mono text-emerald-700 font-semibold">↑ 4.2%</span>
+          </div>
+          <span class="text-[10px] font-mono text-ink-400 block mt-1">Turnaround: 24.8 hrs avg</span>
+        </div>
+
+        <div class="bg-white border border-borderwarm p-4 shadow-subtle">
+          <span class="font-mono text-[10px] uppercase text-ink-500 font-bold block mb-1">Citizen Audit Rating</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-display font-bold text-ink-950">4.8</span>
+            <span class="text-xs text-amber-500">★★★★★</span>
+          </div>
+          <span class="text-[10px] font-mono text-ink-400 block mt-1">Certified by 1,420 citizens</span>
+        </div>
+
+        <div class="bg-white border border-borderwarm p-4 shadow-subtle">
+          <span class="font-mono text-[10px] uppercase text-ink-500 font-bold block mb-1">Duplicate Complaints Saved</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-display font-bold text-terracotta-600">38 Reports</span>
+            <span class="text-[10px] font-mono text-emerald-700 font-semibold">Merged</span>
+          </div>
+          <span class="text-[10px] font-mono text-ink-400 block mt-1">Saved ~14 duplicate dispatches</span>
+        </div>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: LIVE DOCKETS STREAM & WORK ORDER CONTROL                       -->
+      <!-- ===================================================================== -->
+      <section id="tab-sec-dockets" class="space-y-6">
+        
+        <!-- Controls & Filter Toolbar -->
+        <div class="bg-white border border-borderwarm p-4 shadow-subtle flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono">
+          
+          <div class="flex items-center gap-2 w-full md:w-96 relative">
+            <input 
+              type="text" 
+              id="authority-search-input" 
+              oninput="handleSearchDockets(this.value)"
+              placeholder="Search by Docket #, Department, or Street..." 
+              class="w-full bg-linen-50 border border-borderwarm pl-9 pr-3 py-2 text-xs font-mono text-ink-950 placeholder:text-ink-400"
+            />
+            <i data-lucide="search" class="w-4 h-4 text-ink-400 absolute left-3 top-2.5"></i>
+          </div>
+
+          <!-- Status Filters -->
+          <div class="flex flex-wrap gap-1.5 self-start md:self-auto">
+            <button onclick="setAuthorityFilter('all')" class="auth-filter-chip px-3 py-1.5 bg-ink-950 text-linen-50 font-bold rounded shadow-tactile-sm">
+              All (<span id="count-auth-all">4</span>)
+            </button>
+            <button onclick="setAuthorityFilter('pending')" class="auth-filter-chip px-3 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800 rounded">
+              Needs Dispatch
+            </button>
+            <button onclick="setAuthorityFilter('progress')" class="auth-filter-chip px-3 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800 rounded">
+              Crew on Site
+            </button>
+            <button onclick="setAuthorityFilter('audit_pending')" class="auth-filter-chip px-3 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800 rounded">
+              Awaiting Citizen Audit
+            </button>
+            <button onclick="setAuthorityFilter('closed')" class="auth-filter-chip px-3 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800 rounded">
+              Audited & Closed
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Dockets List Table / Cards -->
+        <div id="authority-dockets-container" class="space-y-4">
+          <!-- Populated dynamically via renderAuthorityDockets() -->
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: DUPLICATE DETECTION & INCIDENT CLUSTERING (SYNORA SLIDE 3)     -->
+      <!-- ===================================================================== -->
+      <section id="tab-sec-duplicates" class="hidden space-y-6">
+        
+        <div class="border border-borderwarm bg-white p-6 shadow-subtle space-y-2">
+          <div class="flex items-center gap-2 font-mono text-xs text-terracotta-600 font-bold uppercase">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+            <span>Geospatial & Semantic Incident Deduplication</span>
+          </div>
+          <h3 class="text-xl font-display font-bold text-ink-950">Active Neighborhood Incident Clusters</h3>
+          <p class="text-xs text-ink-600 font-sans max-w-2xl leading-relaxed">
+            When multiple residents report the same infrastructure failure within a 150-meter radius, the system clusters them together. Merging creates a single unified work order while notifying all affected residents simultaneously.
+          </p>
+        </div>
+
+        <!-- Active Cluster Card -->
+        <div class="border border-amber-300 bg-amber-50/40 p-6 shadow-subtle space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-200 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-amber-600 beacon-pulse"></span>
+              <div>
+                <span class="font-mono text-xs font-bold text-amber-950 uppercase">Cluster #CL-174-ROAD-02</span>
+                <span class="text-xs font-sans text-amber-800 block">4th Cross Road & 2nd Main Rd Junction (Radius: 65m)</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 bg-amber-100 border border-amber-300 text-amber-900 font-mono text-xs font-bold rounded">
+                38 Affected Citizens (+1 Votes)
+              </span>
+              <button 
+                onclick="mergeClusterAction()" 
+                id="btn-merge-cluster"
+                class="px-4 py-1.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs uppercase font-bold shadow-tactile-sm transition flex items-center gap-1.5">
+                <i data-lucide="merge" class="w-3.5 h-3.5 text-terracotta-400"></i>
+                <span>Merge into Single Work Order</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div class="bg-white border border-borderwarm p-3.5 space-y-2">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <strong class="text-ink-900">#UF-2026-00142 (Primary)</strong>
+                <span class="text-ink-400">Akash S.</span>
+              </div>
+              <p class="text-xs text-ink-700 font-sans">"Deep 2-ft crater near 4th cross junction. Two-wheelers skidding in dark."</p>
+              <div class="text-[10px] font-mono text-emerald-700 font-semibold">✓ Has Geo-coordinates & Photo</div>
+            </div>
+
+            <div class="bg-white border border-borderwarm p-3.5 space-y-2">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <strong class="text-ink-900">Neighbor Report A</strong>
+                <span class="text-ink-400">Pooja R.</span>
+              </div>
+              <p class="text-xs text-ink-700 font-sans">"Scooter fell into water-filled crater opposite bakery on 2nd main."</p>
+              <div class="text-[10px] font-mono text-ink-500">Matched via Location (40m proximity)</div>
+            </div>
+
+            <div class="bg-white border border-borderwarm p-3.5 space-y-2">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <strong class="text-ink-900">Neighbor Report B</strong>
+                <span class="text-ink-400">Vikram K.</span>
+              </div>
+              <p class="text-xs text-ink-700 font-sans">"Damaged asphalt patch sinking after pipe dig work."</p>
+              <div class="text-[10px] font-mono text-ink-500">Matched via Semantic Road Category</div>
+            </div>
+
+          </div>
+
+          <div class="p-3 bg-white border border-amber-200 text-xs font-mono text-ink-700 flex items-center justify-between">
+            <span>Unified Priority: <strong class="text-terracotta-600">P1 URGENT HAZARD (High Citizen Volume)</strong></span>
+            <span>Target Division: <strong>BBMP Asphalt & Heavy Paving Crew #14</strong></span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: FIELD CREW MANAGEMENT                                          -->
+      <!-- ===================================================================== -->
+      <section id="tab-sec-crews" class="hidden space-y-6">
+        
+        <div class="border border-borderwarm bg-white p-6 shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="font-mono text-xs text-terracotta-600 font-bold uppercase tracking-wider block">Field Operations</span>
+            <h3 class="text-xl font-display font-bold text-ink-950 mt-0.5">Zonal Municipal Field Crews (Ward 174)</h3>
+            <p class="text-xs text-ink-600 font-sans mt-1">Real-time status of on-duty engineering, electrical, and water response units.</p>
+          </div>
+
+          <div class="font-mono text-xs bg-linen-100 px-3 py-1.5 border border-borderwarm">
+            <span>Shift: <strong>08:00 - 20:00 IST</strong> • 14 Linemen & Engineers</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          
+          <!-- Crew 1 -->
+          <div class="bg-white border border-borderwarm p-5 shadow-subtle space-y-3">
+            <div class="flex justify-between items-start border-b border-borderwarm pb-3">
+              <div>
+                <span class="font-mono text-xs font-bold text-ink-950 block">BBMP Road Repair Crew #14</span>
+                <span class="font-mono text-[10px] text-ink-500">Lead: Supervisor Manjunath</span>
+              </div>
+              <span class="px-2 py-0.5 bg-yellow-100 text-yellow-900 border border-yellow-200 font-mono text-[10px] font-bold rounded">
+                Active on Site
+              </span>
+            </div>
+            <div class="text-xs font-mono space-y-1.5 text-ink-700">
+              <div>Assigned Ticket: <strong class="text-ink-950">#UF-2026-00142</strong></div>
+              <div>Current Location: <strong>2nd Main, Sector 2</strong></div>
+              <div>Equipment: Cold-mix asphalt compactor</div>
+            </div>
+            <div class="pt-2 border-t border-borderwarm flex gap-2">
+              <button onclick="showToast('Dispatch alert pinged to Supervisor Manjunath (+91 98450 11223)')" class="flex-1 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-900 font-mono text-[11px] font-semibold">
+                Radio Ping
+              </button>
+            </div>
+          </div>
+
+          <!-- Crew 2 -->
+          <div class="bg-white border border-borderwarm p-5 shadow-subtle space-y-3">
+            <div class="flex justify-between items-start border-b border-borderwarm pb-3">
+              <div>
+                <span class="font-mono text-xs font-bold text-ink-950 block">BESCOM Rapid Van #08</span>
+                <span class="font-mono text-[10px] text-ink-500">Lead: Lineman Anjanappa</span>
+              </div>
+              <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 border border-emerald-200 font-mono text-[10px] font-bold rounded">
+                Ready for Next Call
+              </span>
+            </div>
+            <div class="text-xs font-mono space-y-1.5 text-ink-700">
+              <div>Recent Ticket: <strong class="text-ink-950">#UF-2026-00141 (Completed)</strong></div>
+              <div>Current Location: <strong>Substation Depot, Sector 3</strong></div>
+              <div>Equipment: 12m Hydraulic Bucket Arm</div>
+            </div>
+            <div class="pt-2 border-t border-borderwarm flex gap-2">
+              <button onclick="showToast('Van #08 dispatched to standby position.')" class="flex-1 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-900 font-mono text-[11px] font-semibold">
+                Dispatch Order
+              </button>
+            </div>
+          </div>
+
+          <!-- Crew 3 -->
+          <div class="bg-white border border-borderwarm p-5 shadow-subtle space-y-3">
+            <div class="flex justify-between items-start border-b border-borderwarm pb-3">
+              <div>
+                <span class="font-mono text-xs font-bold text-ink-950 block">BWSSB Rapid Pipe Unit #03</span>
+                <span class="font-mono text-[10px] text-ink-500">Lead: Engineer Selvam</span>
+              </div>
+              <span class="px-2 py-0.5 bg-sky-100 text-sky-900 border border-sky-200 font-mono text-[10px] font-bold rounded">
+                En Route
+              </span>
+            </div>
+            <div class="text-xs font-mono space-y-1.5 text-ink-700">
+              <div>Assigned Ticket: <strong class="text-ink-950">#UF-2026-00140</strong></div>
+              <div>Target Location: <strong>17th Cross, Sector 1</strong></div>
+              <div>Equipment: High-pressure jetting & excavation pump</div>
+            </div>
+            <div class="pt-2 border-t border-borderwarm flex gap-2">
+              <button onclick="showToast('GPS telemetry fetched: Crew is 4 mins away.')" class="flex-1 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-900 font-mono text-[11px] font-semibold">
+                Track GPS
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 4: WARD ANALYTICS & CITIZEN AUDIT INDEX                           -->
+      <!-- ===================================================================== -->
+      <section id="tab-sec-analytics" class="hidden space-y-6">
+        
+        <div class="border border-borderwarm bg-white p-6 shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="font-mono text-xs text-terracotta-600 font-bold uppercase tracking-wider block">Accountability & Performance</span>
+            <h3 class="text-xl font-display font-bold text-ink-950 mt-0.5">Ward 174 Public Redressal Audit Index</h3>
+            <p class="text-xs text-ink-600 font-sans mt-1">Based on citizen audit ratings submitted after physical repair verification.</p>
+          </div>
+
+          <div class="text-right">
+            <span class="font-mono text-[10px] text-ink-400 uppercase font-bold block">Overall Ward Integrity</span>
+            <span class="text-2xl font-display font-bold text-emerald-700">Grade A (94.2/100)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Breakdown by Category -->
+          <div class="bg-white border border-borderwarm p-5 shadow-subtle space-y-4">
+            <span class="font-mono text-xs font-bold uppercase text-ink-900 block">Incident Volume by Infrastructure Wing</span>
+            
+            <div class="space-y-3 font-mono text-xs">
+              <div>
+                <div class="flex justify-between text-[11px] mb-1">
+                  <span>Roads & Pavements (BBMP)</span>
+                  <span class="font-bold">42% (58 Dockets)</span>
+                </div>
+                <div class="w-full bg-linen-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-terracotta-600 h-full" style="width: 42%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-[11px] mb-1">
+                  <span>Electricity & Lighting (BESCOM)</span>
+                  <span class="font-bold">28% (39 Dockets)</span>
+                </div>
+                <div class="w-full bg-linen-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-amber-600 h-full" style="width: 28%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-[11px] mb-1">
+                  <span>Water Supply & Sewage (BWSSB)</span>
+                  <span class="font-bold">18% (25 Dockets)</span>
+                </div>
+                <div class="w-full bg-linen-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-sky-600 h-full" style="width: 18%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-[11px] mb-1">
+                  <span>Solid Waste & Sanitation</span>
+                  <span class="font-bold">12% (17 Dockets)</span>
+                </div>
+                <div class="w-full bg-linen-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-emerald-700 h-full" style="width: 12%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Citizen Satisfaction Scores -->
+          <div class="bg-white border border-borderwarm p-5 shadow-subtle space-y-4">
+            <span class="font-mono text-xs font-bold uppercase text-ink-900 block">Recent Citizen Audit Verifications</span>
+            
+            <div class="space-y-3 text-xs">
+              
+              <div class="p-3 bg-linen-50 border border-borderwarm font-mono space-y-1">
+                <div class="flex justify-between items-center">
+                  <strong class="text-ink-900">#UF-2026-00135 (Water Drain)</strong>
+                  <span class="text-amber-500 font-bold">★★★★★ 5.0</span>
+                </div>
+                <div class="text-[11px] text-emerald-800 font-semibold">Issue fully resolved & verified on spot</div>
+                <p class="text-[11px] font-sans text-ink-600 italic">"Silt removed thoroughly and water flows freely now."</p>
+                <span class="text-[9px] text-ink-400 block pt-0.5">Audited by Akash S. • Sep 21</span>
+              </div>
+
+              <div class="p-3 bg-linen-50 border border-borderwarm font-mono space-y-1">
+                <div class="flex justify-between items-center">
+                  <strong class="text-ink-900">#UF-2026-00139 (Solid Waste)</strong>
+                  <span class="text-amber-500 font-bold">★★★★☆ 4.0</span>
+                </div>
+                <div class="text-[11px] text-emerald-800 font-semibold">Sanitized within SLA</div>
+                <p class="text-[11px] font-sans text-ink-600 italic">"Compacting truck cleared the dump. Ground was bleached."</p>
+                <span class="text-[9px] text-ink-400 block pt-0.5">Audited by Josikaa D. • Sep 23</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CREW DISPATCH & WORK ORDER ASSIGNMENT                              -->
+  <!-- ========================================================================= -->
+  <div id="modal-dispatch" class="fixed inset-0 z-50 bg-ink-950/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white border border-ink-900 max-w-lg w-full p-6 shadow-2xl relative">
+      <div class="flex justify-between items-start pb-3 border-b border-borderwarm">
+        <div>
+          <span class="font-mono text-[10px] text-terracotta-600 font-bold uppercase tracking-wider">Field Operations</span>
+          <h3 class="text-xl font-display font-bold text-ink-950" id="dispatch-modal-title">
+            Assign Work Order for #UF-2026-00142
+          </h3>
+        </div>
+        <button onclick="closeDispatchModal()" class="text-ink-400 hover:text-ink-900">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="py-4 space-y-4 font-mono text-xs">
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-1">Select On-Duty Zonal Crew</label>
+          <select id="dispatch-crew-select" class="w-full bg-linen-50 border border-borderwarm p-2.5 text-xs font-mono text-ink-900">
+            <option value="BBMP Road Repair Crew #14 (Supervisor Manjunath)">BBMP Road Repair Crew #14 (Supervisor Manjunath - Asphalt Unit)</option>
+            <option value="BESCOM Rapid Response Van #08 (Lineman Anjanappa)">BESCOM Rapid Response Van #08 (Lineman Anjanappa)</option>
+            <option value="BWSSB Sanitary Jetting Unit #03 (Engineer Selvam)">BWSSB Sanitary Jetting Unit #03 (Engineer Selvam)</option>
+            <option value="Solid Waste Heavy Compactor #02">Solid Waste Heavy Compactor #02</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-1">Mandatory SLA Commitment</label>
+          <select id="dispatch-sla-select" class="w-full bg-linen-50 border border-borderwarm p-2.5 text-xs font-mono text-ink-900">
+            <option value="12 Hours (Emergency Priority)">12 Hours (Emergency Priority)</option>
+            <option value="24 Hours (Standard Hazard)">24 Hours (Standard Hazard)</option>
+            <option value="48 Hours (Routine Maintenance)">48 Hours (Routine Maintenance)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[10px] text-ink-500 uppercase font-bold mb-1">Engineering Instructions for Crew</label>
+          <textarea id="dispatch-notes" rows="2" class="w-full bg-linen-50 border border-borderwarm p-2 text-xs font-sans text-ink-900 placeholder:text-ink-400 resize-none" placeholder="e.g. Excavate sunken edges, lay rapid-curing bitumen, and clear gravel."></textarea>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-3 border-t border-borderwarm">
+        <button onclick="closeDispatchModal()" class="py-2.5 px-4 border border-borderwarm text-ink-700 hover:bg-linen-100 font-mono text-xs uppercase">
+          Cancel
+        </button>
+        <button onclick="confirmCrewDispatch()" class="flex-1 py-2.5 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs font-bold uppercase tracking-wider shadow-tactile-sm">
+          Dispatch Field Crew Now →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-ink-950 text-linen-50 border border-ink-800 font-mono text-xs px-4 py-3 shadow-xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 pointer-events-none">
+    <i data-lucide="bell" class="w-4 h-4 text-terracotta-400"></i>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT STATE & OPERATIONS LOGIC                                       -->
+  <!-- ========================================================================= -->
+  <script>
+    const STORAGE_KEY = 'urban_fix_citizen_db_v3';
+
+    let appData = {
+      communityIssues: [],
+      myReports: []
+    };
+
+    let activeTab = 'dockets';
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let targetDispatchDocketId = null;
+
+    function loadSharedData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          appData = JSON.parse(saved);
+        }
+      } catch (e) {
+        console.error('Error loading shared data:', e);
+      }
+      updateCounts();
+    }
+
+    function saveSharedData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      } catch (e) {
+        console.error('Failed to save to localStorage:', e);
+      }
+      updateCounts();
+    }
+
+    function updateCounts() {
+      const total = appData.myReports.length;
+      document.getElementById('badge-total-dockets').textContent = total;
+      document.getElementById('count-auth-all').textContent = total;
+      document.getElementById('kpi-active-count').textContent = appData.myReports.filter(r => r.status === 'In Progress').length;
+    }
+
+    // Switch Authority Tabs
+    function switchAuthorityTab(tab) {
+      activeTab = tab;
+      
+      ['dockets', 'duplicates', 'crews', 'analytics'].forEach(t => {
+        document.getElementById(`tab-sec-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (btn) {
+          btn.className = 'px-3.5 py-1.5 rounded font-medium text-ink-700 hover:text-ink-950 transition flex items-center gap-1.5';
+        }
+      });
+
+      document.getElementById(`tab-sec-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      if (activeBtn) {
+        activeBtn.className = 'px-3.5 py-1.5 rounded font-bold bg-ink-950 text-linen-50 transition flex items-center gap-1.5 shadow-tactile-sm';
+      }
+
+      if (tab === 'dockets') renderAuthorityDockets();
+      lucide.createIcons();
+    }
+
+    // Render Dockets Table & Operations Control
+    function renderAuthorityDockets() {
+      const container = document.getElementById('authority-dockets-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      let items = appData.myReports.filter(d => {
+        if (currentFilter === 'pending') return d.status === 'In Progress' && d.timeline.length < 3;
+        if (currentFilter === 'progress') return d.status === 'In Progress';
+        if (currentFilter === 'audit_pending') return d.status === 'Ready for Your Audit';
+        if (currentFilter === 'closed') return d.status === 'Completed & Verified';
+        return true;
+      });
+
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        items = items.filter(d => 
+          d.id.toLowerCase().includes(q) ||
+          d.category.toLowerCase().includes(q) ||
+          d.description.toLowerCase().includes(q) ||
+          d.location.toLowerCase().includes(q) ||
+          d.department.toLowerCase().includes(q)
+        );
+      }
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="border border-borderwarm bg-white p-12 text-center font-mono">
+            <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-600 mx-auto mb-2"></i>
+            <h4 class="font-display font-bold text-ink-950">No dockets in this category</h4>
+            <p class="text-xs text-ink-500 mt-1">All field tickets are operating within SLA commitments.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      items.forEach(d => {
+        const card = document.createElement('div');
+        card.className = 'border border-borderwarm bg-white p-5 sm:p-6 shadow-subtle hover:border-ink-800 transition space-y-4';
+
+        let badgeStyle = 'bg-yellow-50 text-yellow-800 border-yellow-200';
+        if (d.status === 'Ready for Your Audit') badgeStyle = 'bg-sky-50 text-sky-800 border-sky-300 font-bold';
+        if (d.status === 'Completed & Verified') badgeStyle = 'bg-emerald-50 text-emerald-800 border-emerald-300 font-bold';
+
+        card.innerHTML = `
+          <!-- Top Row -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-borderwarm pb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="font-mono text-sm font-bold text-ink-950">#${d.id}</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 bg-linen-100 border border-borderwarm text-ink-800 font-semibold uppercase">${d.department}</span>
+              <span class="text-[10px] font-mono text-ink-500">• Reported: ${d.timestamp}</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono px-2.5 py-1 border rounded ${badgeStyle}">
+                ${d.status === 'Completed & Verified' ? '✓ ' + d.status : d.status}
+              </span>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+            
+            <div class="lg:col-span-8 space-y-2">
+              <div>
+                <span class="font-mono text-[10px] text-terracotta-600 font-bold uppercase tracking-wider">${d.category}</span>
+                <p class="text-xs text-ink-800 font-sans font-medium mt-0.5">${d.description}</p>
+              </div>
+
+              <div class="flex items-center gap-2 text-xs font-mono text-ink-600">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-terracotta-600"></i>
+                <span>${d.location}</span>
+              </div>
+
+              <div class="flex items-center gap-3 pt-1">
+                ${d.hasPhoto && d.photoUrl ? `
+                  <a href="${d.photoUrl}" target="_blank" class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-linen-100 border border-borderwarm text-[10px] font-mono text-ink-800 hover:border-ink-950">
+                    <i data-lucide="image" class="w-3 h-3 text-terracotta-600"></i>
+                    <span>Resident Photo Attachment</span>
+                  </a>
+                ` : ''}
+
+                ${d.hasAudio ? `
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-linen-100 border border-borderwarm text-[10px] font-mono text-ink-800">
+                    <i data-lucide="mic" class="w-3 h-3 text-terracotta-600"></i>
+                    <span>Voice Memo Attached</span>
+                  </span>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Operations Action Buttons -->
+            <div class="lg:col-span-4 bg-linen-50 border border-borderwarm p-4 space-y-2.5 text-right sm:text-left">
+              <span class="text-[10px] font-mono uppercase text-ink-500 font-bold block">Authority Action Desk:</span>
+
+              ${d.status === 'In Progress' ? `
+                <div class="space-y-2">
+                  <button 
+                    onclick="openDispatchModal('${d.id}')" 
+                    class="w-full py-2 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-950 font-mono text-xs font-bold uppercase flex items-center justify-center gap-1.5 transition">
+                    <i data-lucide="truck" class="w-3.5 h-3.5 text-terracotta-600"></i>
+                    <span>Assign Field Crew</span>
+                  </button>
+
+                  <button 
+                    onclick="authorityMarkRepaired('${d.id}')" 
+                    class="w-full py-2 bg-ink-950 hover:bg-black text-linen-50 font-mono text-xs font-bold uppercase tracking-wider shadow-tactile-sm flex items-center justify-center gap-1.5 transition">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span>Sign-off & Notify Citizen</span>
+                  </button>
+                </div>
+              ` : d.status === 'Ready for Your Audit' ? `
+                <div class="p-2.5 bg-sky-50 border border-sky-200 text-sky-900 font-mono text-[11px]">
+                  <strong>Repaired & Signed-off:</strong> Notification transmitted to citizen mobile. Awaiting citizen audit rating.
+                </div>
+              ` : `
+                <div class="p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-950 font-mono text-[11px] space-y-1">
+                  <div class="flex justify-between font-bold">
+                    <span>Citizen Verified:</span>
+                    <span class="text-amber-500">${'★'.repeat(d.citizenAudit?.rating || 5)}</span>
+                  </div>
+                  <div class="text-[10px] text-emerald-800">${d.citizenAudit?.tag || 'Issue fully resolved'}</div>
+                  <p class="text-[10px] font-sans italic">"${d.citizenAudit?.remarks || 'Satisfied'}"</p>
+                </div>
+              `}
+            </div>
+
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Set Authority Filter
+    function setAuthorityFilter(f) {
+      currentFilter = f;
+      document.querySelectorAll('.auth-filter-chip').forEach(c => {
+        c.className = 'auth-filter-chip px-3 py-1.5 bg-linen-100 hover:bg-linen-200 border border-borderwarm text-ink-800 rounded';
+      });
+      event.currentTarget.className = 'auth-filter-chip px-3 py-1.5 bg-ink-950 text-linen-50 font-bold rounded shadow-tactile-sm';
+      renderAuthorityDockets();
+    }
+
+    function handleSearchDockets(q) {
+      searchQuery = q;
+      renderAuthorityDockets();
+    }
+
+    // Modal Dispatch
+    function openDispatchModal(id) {
+      targetDispatchDocketId = id;
+      document.getElementById('dispatch-modal-title').textContent = `Assign Work Order for #${id}`;
+      document.getElementById('modal-dispatch').classList.remove('hidden');
+    }
+
+    function closeDispatchModal() {
+      document.getElementById('modal-dispatch').classList.add('hidden');
+    }
+
+    function confirmCrewDispatch() {
+      const d = appData.myReports.find(r => r.id === targetDispatchDocketId);
+      if (d) {
+        const crew = document.getElementById('dispatch-crew-select').value;
+        const sla = document.getElementById('dispatch-sla-select').value;
+
+        d.timeline.splice(2, 0, {
+          label: `Field Crew Dispatched (${crew})`,
+          time: 'Just now',
+          done: true
+        });
+
+        saveSharedData();
+        renderAuthorityDockets();
+        closeDispatchModal();
+        showToast(`Dispatched: ${crew} allocated to #${d.id} with ${sla} commitment.`);
+      }
+    }
+
+    // Authority Signs off Repair (Transitions ticket to citizen audit)
+    function authorityMarkRepaired(id) {
+      const d = appData.myReports.find(r => r.id === id);
+      if (d) {
+        d.status = 'Ready for Your Audit';
+        d.timeline[2] = { label: 'Field Repair Completed by Zonal Engineers', time: 'Just now', done: true };
+        d.timeline[3] = { label: 'Waiting for Citizen Verification Sign-off', time: 'Awaiting citizen review', done: false };
+
+        const c = appData.communityIssues.find(i => i.id === id);
+        if (c) {
+          c.status = 'Repaired (Needs Resident Sign-off)';
+          c.statusColor = 'bg-sky-50 text-sky-800 border-sky-200';
+          c.comments.push({
+            author: 'Municipal Executive Engineer',
+            text: 'Field repair completed on site. Reporting citizen pinged for verification audit.'
+          });
+        }
+
+        saveSharedData();
+        renderAuthorityDockets();
+        showToast(`Docket #${id} marked as Repaired. Citizen notified for verification!`);
+      }
+    }
+
+    // Merge Cluster Action
+    function mergeClusterAction() {
+      const btn = document.getElementById('btn-merge-cluster');
+      btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> <span>Merged into #UF-2026-00142</span>`;
+      btn.className = 'px-4 py-1.5 bg-emerald-800 text-white font-mono text-xs uppercase font-bold shadow-tactile-sm flex items-center gap-1.5';
+      showToast('Merged 3 duplicate reports into Work Order #UF-2026-00142. Priority upgraded to P1 High Volume.');
+      lucide.createIcons();
+    }
+
+    // Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-message');
+      text.textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSharedData();
+      renderAuthorityDockets();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
