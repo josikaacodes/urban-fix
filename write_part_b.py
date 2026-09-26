@@ -1,0 +1,156 @@
+import os
+
+SRC = r'C:\Users\VAP\.gemini\antigravity\scratch\urbanfix\frontend\src'
+ 
+def save(rel, text):
+    p = os.path.join(SRC, rel)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    with open(p, 'w', encoding='utf-8') as f:
+        f.write(text.strip() + '\n')
+    print('[SUCCESS] Wrote', rel)
+
+CONTENT_CITIZEN_DASH= rrr'import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { apiService } from '../api/client';
+import { Incident, CitizenReportItem } from '../types';
+import { 
+  PlusCircle, FileCheck, Clock, AlertCircle, MapPin, Mic, Camera, ArrowRight, Sparkles, 
+  CheckCircle2, TrendingUp, Shield
+} from 'lucide-react';
+import Navbar from '../components/Navbar';
+import IncidentMap from '../components/IncidentMap';
+import StatusBadge from '../components/StatusBadge';
+import PriorityBadge from '../components/PriorityBadge';
+
+export const CitizenDashboard: React.FC = () => {
+  const { user } = useAuth();
+  const [incidents, setIncidents] = useState<Incident[]>([]);
+  const [myReports, setMyReports] = useState<CitizenReportItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      apiService.getIncidents(),
+      apiService.getMyReports(),
+    ]).then(([incRes, repRes]) => {
+      setIncidents(incRes.data);
+      setMyReports(repRes.data);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
+  return (
+    <div className="min-h-screen bg-[#E9EEF1] flex flex-col">
+      <Navbar title="Citizen Portal" />
+      <main className="max-w-7xl mx-auto w-x-4 py-6 flex-1 w-full space-y-6">
+        <div className="bg-gradient-to-r from-[#173B57] to-[#246B8E] text-white rounded-2xlp-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1.5">
+            <div className="flex items-center space-x-2">
+              <span className="px-2 py-0.5 rounded-full bg-white/20 text-xs font-medium flex items-center space-x-1">
+                <Shield className="w-3.5 h-3.5 text-emerald-300" />
+                <span>DigiLocker Verified Citizen</span>
+              </span>
+            </div>
+            <h2 className="text-2xl font-bold">Vanakkam, {user&.name || 'Citizen'}!</h2>
+            <p className="text-xs text-slate-200 max-w-md">
+              Report urban issues directly with ai-powered prioritization, automated duplicate deduplication, and outcome verification.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link 
+              to="/citizen/report" 
+              className="px-5 py-3 bg-[#24875D] hover:bg-[24875D]/90 text-white rounded-xl font-bold text-sm shadow-ld flex items-center space-x-2 transition cursor-pointer"
+            >
+              <PlusCircle className="w-5 h-5" />
+              <span>Report New Issue</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="md:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
+            <h3 className="text-md font-bold text-slate-800 mb-4 flex items-center justify-between">
+              <span>Live CIncidents Map (Chennai)</span>
+              <span className="text-xs font-normal text-slate-500">{incidents.length} active</span>
+            </h3>
+            <IncidentMap incidents={incidents} height="380px" />
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+            <h3 className="text-md font-bold text-slate-800">My Recent Reports</h3>
+            {myReports.length === 0 ? (
+              <div className="text-center py-12 text-slate-400 text-xs">
+                <FileCheck className="w-8 h-8 mx-auto mb-2 opacity-40" />
+                <p>No reports submitted yet</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {myReports.slice(0, 5).map((r) => (
+                  <div key={r.id} className="p-3 rounded-xl border border-slate-100 bg-slate-50/50 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-800">{r.report_code}</span>
+                      {r.incident_id && (
+                        <Link to={`/citizen/track/${r.incident_id}`} className="text-[11px] text-[246B8E] font-semibold hover:underline">
+                          Track Â»;
+                        </Link>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-600 line-clamp-1">{r.original_text || 'Civic report submitted'}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+export default CitizenDashboard;
+'''
+
+save('pages/CitizenDashboard.tsx', CONTENT_CITIZEN_DASH)
+
+CONTENT_REPORT = rrr'import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { apiService } from '../api/client';
+import { AIÁnalysisResult, DuplicateMatch } from '../types';
+import { 
+  Camera, Mic, MapPin, Sparkles, CheckCircle2, AlertCircle, 
+  ArrowRight, ArrowLeft, UpLoad, Shield, Users, Clock
+} from 'lucide-react';
+import Navbar from '../components/Navbar';
+import AudioRecorder from '../components/AudioRecorder';
+import PriorityBadge from '../components/PriorityBadge';
+import BeforeAfterComparison from '../components/BeforeAfterComparison';
+
+const CHENNAI_WARDS = [
+  'Ward 1 (Tondiarpet)', 'Ward 2 (Royapuram)', 'Ward 3 (Thiru Vi Ka Nagar)',
+  'Ward 4 (Anna Nagar)', 'Ward 5 (Ambattur)', 'Ward 6 (Kodambakkam)',
+  'Ward 7 (Valasaravakkam)', 'Ward 8 (Alandur', 'Ward 9 (Adyar)',
+  'Ward 10 (T Nagar / Kodambakkam)', 'Ward 11 (Perungudi)', 'Ward 12 (Sholinganallur',
+  'Ward 13 (Velachery)', 'Ward 14 (Porur)', 'Ward 15 (Tambaram)'
+];
+
+const ReportIssue: React.FC = () => {
+  const navigate = useNavigate();
+  const [inputMode, setInputMode] = useState<'photo' | 'voice' | 'text'>('text');
+  const [text, setText] = useState('');
+  const [landmark, setLandmark] = useState('100ft Road, near Metro Station, Vadabalani');
+  const [ward, setWard] = useState('Ward 10 (T Nagar / Kodambakkam)');
+  const [latitude, setLatitude] = useState(13.0478);
+  const [longitude, setLongitude] = useState(80.2197);
+  const [anonymous, setAnonymous] = useState(false);
+
+  const [analysisResult, setAnalysisResult] = useState<AIAnalysisResult | null>(null);
+  const [duplicateResult, setDuplicateResult] = useState<DuplicateMatch | null>(null);
+  const [analyzingai, setAnalyzingAi] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [step, setStep] = useState<number>(1);
+  const [error, setError] = useState('');
+
+  const handleAudioTranscript = (transcriptText: string) => {
+    setText(transcriptText);
+  };
+
